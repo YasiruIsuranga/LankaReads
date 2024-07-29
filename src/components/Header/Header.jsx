@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
-import logo from "../../img/new-removebg-preview.png"
+import logo from "../../img/logo1.png"
 
 function Header() {
     return (
     <> 
-        <header className=" container-fluid bg-white sticky-top header">
+        <header className=" container-fluid bg-white sticky-top">
             <div className="container-fluid shadow-sm ">
                 <div className="row align-items-center py-2">
                     <div className="col d-flex align-items-center">

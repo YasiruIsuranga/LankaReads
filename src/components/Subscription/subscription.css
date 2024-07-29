@@ -1,0 +1,37 @@
+.subscription {
+   
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.6); 
+    
+}
+
+.subscription::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    
+}
+
+.subscription .row {
+    position: relative;
+    z-index: 1;
+}
+.btn1 {
+    background-color: #FF5733;
+    border-color: #FF5733;
+    color: white;
+}
+
+.btn1:hover {
+    background-color: #f42d00;
+    border-color: #f42d00;
+}
