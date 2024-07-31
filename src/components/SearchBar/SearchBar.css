@@ -9,11 +9,11 @@
     background-color: #FF4500;
   }
   
-  /* .search-bar .input-group .form-control {
+  .search-bar .input-group .form-control {
     border: none;
     max-width: 100px;
   }
-   */
+  
   .search-bar .input-group-append .btn {
     border: none;
   }
@@ -24,4 +24,9 @@
   
   .search-input{
     max-width: 350px;
+  }
+
+  .search-btn{
+    background-color: #FF6347;
+    color: #FF6347;
   }

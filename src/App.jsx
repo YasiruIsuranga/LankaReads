@@ -2,12 +2,12 @@ import { useState } from 'react'
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/footer';
-import Subscription from './components/Subscription/subscription';
-import Overview from './components/Overview/overview';
-import Features from './components/Features/features';
-import Recomended from './components/Recomand/recomended';
+
+import About from './pages/about/About';
+import Books from './pages/books/Books';
+import Contact from './pages/contact/Contact';
+import Authors from './pages/Authors/Authors';
+import Register from './pages/Register/Register';
 
 function App() {
 
@@ -15,17 +15,17 @@ function App() {
     <>
     <div className='app-container'>
 
-      <Header />
       <Routes>
         <Route>
-          <Route path='/' element={<Home />} />
+          <Route index element={<Home />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/About' element={<About />} />
+          <Route path='/Books' element={<Books />} />
+          <Route path='/Contact' element={<Contact />} />
+          <Route path='/Authors' element={<Authors />} />
+          <Route path='/Register' element={<Register />} />
         </Route>
       </Routes>
-      <Features/>
-      <Recomended/>
-      <Overview/>
-      <Subscription/>
-      <Footer/>
     </div>
     </>
   )

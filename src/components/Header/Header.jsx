@@ -7,7 +7,7 @@ function Header() {
     return (
     <> 
         <header className=" container-fluid bg-white sticky-top">
-            <div className="container-fluid shadow-sm ">
+            <div className="container-fluid">
                 <div className="row align-items-center py-2">
                     <div className="col d-flex align-items-center">
                         <a href="#">
@@ -16,10 +16,12 @@ function Header() {
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <div className="collapse navbar-collapse">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item mr-3"><a className="nav-link" href="#">Home</a></li>
-                                    <li className="nav-item mr-3"><a className="nav-link" href="#">Shop</a></li>
-                                    <li className="nav-item mr-3"><a className="nav-link" href="#">Authors</a></li>
-                                    <li className="nav-item mr-3"><a className="nav-link" href="#">Register</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/">Home</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/Books">Books</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/About">About</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/Authors">Authors</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/Contact">Contact Us</a></li>
+                                    <li className="nav-item mr-3"><a className="nav-link" href="/Register">Register</a></li>
                                 </ul>
                             </div>
                         </nav>

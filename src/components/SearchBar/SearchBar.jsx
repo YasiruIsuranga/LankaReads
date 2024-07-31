@@ -16,7 +16,7 @@ const SearchBar = () => {
       </div>
       <input type="text" style={{borderRadius:'10px', marginLeft:'10px'}} className="form-control search-input" placeholder="Search Books Here" aria-label="Search Books Here" aria-describedby="button-addon2"/>
       <div className="input-group-append">
-        <button className="btn btn-outline-secondary" type="button" id="button-addon2">
+        <button className="btn btn-outline-secondary search-btn" type="button" id="button-addon2">
           <i className="bi bi-search"></i>
         </button>
       </div>
