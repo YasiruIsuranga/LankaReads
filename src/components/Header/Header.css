@@ -1,13 +1,3 @@
-.btn1 {
-    background-color: #FF5733;
-    border-color: #FF5733;
-    color: white;
-}
-
-.btn1:hover {
-    background-color: #f42d00;
-    border-color: #f42d00;
-}
 
 .logo{
     width: 100px;
@@ -15,19 +5,42 @@
     z-index: -100;
 }
 
-
-.text-orange {
-    color: #ff6600; 
+.navbar-nav .nav-link {
+    padding-left: 15px;
+    
+    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.icon {
-    border: 2px solid #ff6600; 
-    padding: 10px;
-    border-radius: 50%; 
-    display: inline-block;
+.navbar-nav .nav-link:hover {
+    color: #f42d00;
+    background-color: #f8f9fa; 
+    text-decoration: border; 
+    transform: scale(1.1);
+}
+.col .text-dark {
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.icon .fa {
-    color: #ff6600;
+.col .text-dark:hover {
+    color: #f42d00;
+    background-color: #f8f9fa;
+    transform: scale(1.1);
+    border-radius: 40%;
 }
 
+.btn1 {
+    background-color: #f42d00;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+
+.btn1:hover {
+    background-color: #d02000;
+    transform: scale(1.05);
+}
