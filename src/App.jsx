@@ -7,6 +7,7 @@ import About from './pages/about/About';
 import Books from './pages/books/Books';
 import Contact from './pages/contact/Contact';
 import Authors from './pages/Authors/Authors';
+import Blogs from './pages/Blogs/Blogs';
 import Register from './pages/Register/Register';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/Books' element={<Books />} />
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Authors' element={<Authors />} />
+          <Route path='/Blogs' element={<Blogs />} />
           <Route path='/Register' element={<Register />} />
         </Route>
       </Routes>

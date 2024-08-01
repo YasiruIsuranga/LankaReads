@@ -13,8 +13,9 @@ import Footer from '../../components/Footer/footer';
 function Home() {
   return (
     <>
+    
     <Header />
-    <div className='home-page'>
+    <div className='home-page' >
       <div className='col-lg-12 d-flex flex-row align-items-center justify-content-between'>
         <div className='col-lg-4'>
         <ProfileCard />
