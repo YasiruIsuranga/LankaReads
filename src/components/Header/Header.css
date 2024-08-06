@@ -1,15 +1,11 @@
-
-.logo{
-    width: 100px;
+.logo1 {
+    width: 150px;
     height: auto;
-    z-index: -100;
 }
 
 .navbar-nav .nav-link {
     padding-left: 15px;
-    
-    transition: color 0.3s ease, background-color 0.3s ease;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
@@ -18,6 +14,7 @@
     text-decoration: border; 
     transform: scale(1.1);
 }
+
 .col .text-dark {
     padding-left: 10px;
     padding-right: 10px;
@@ -31,16 +28,74 @@
     border-radius: 40%;
 }
 
-.btn1 {
+.btngetintouch {
     background-color: #f42d00;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none;
+    border-color: #f42d00;
+    color: white;
+    border-radius: 15%;
 }
 
-.btn1:hover {
-    background-color: #d02000;
-    transform: scale(1.05);
+.btngetintouch:hover {
+    border: 2px solid #f42d00;
+    border-color: #f42d00;
 }
+
+
+/* Mobile menu styling */
+.mobile-menu {
+    background-color: white;
+    padding: 1rem;
+    position: absolute;
+    top: 100%; /* Position the menu directly below the logo */
+    left: 0; /* Align menu to the left */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: auto; /* Adjust width to fit content */
+    min-width: 200px; /* Optional: minimum width for better appearance */
+    display: none; /* Initially hide menu */
+   
+}
+
+.mobile-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu ul li {
+    margin-bottom: 1rem;
+}
+
+.mobile-menu ul li a {
+    color: black;
+    text-decoration: none;
+    display: block; /* Make the links full width within list items */
+    padding: 0.5rem 1rem; /* Add padding for better click area */
+}
+
+/* Show mobile menu button and menu on small screens */
+@media (max-width: 991px) {
+    .navbar-toggler {
+        display: block;
+    }
+    
+    .mobile-menu {
+        display: block; /* Show menu when open */
+    }
+}
+
+/* Hide mobile menu button and menu on large screens */
+@media (min-width: 992px) {
+    .navbar-toggler, .mobile-menu {
+        display: none;
+    }
+}
+
+/* Custom offcanvas styling for mobile menu */
+.custom-offcanvas {
+    height: 50%;
+    max-height: 50%; /* Ensure it doesn’t exceed 50% of the viewport height */
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 120px;
+}
+

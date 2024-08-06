@@ -33,17 +33,17 @@ function Footer() {
                 </div>
             </section>
             <section className="">
-                <div className="container text-center text-md-start mt-5">
+                <div className="container text-center text-md-start ">
                     <div className="row mt-3">
                         <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <a href="#">
                             <img src={logo} className='logo2' alt="Lanka Reads" />
                         </a>
-                            <p>
+                            <p className='pp'>
                                 Lanka reads is the best and most popular online book shop in Sri Lanka. It was a digital book for a good reader.
                             </p>
                         </div>
-                        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5">
                             <h6 className="text-uppercase fw-bold mb-4">
                                 Our Links
                             </h6>
@@ -60,7 +60,7 @@ function Footer() {
                                 <a href="#!" className="text-reset">Register</a>
                             </p>
                         </div>
-                        <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5">
                             <h6 className="text-uppercase fw-bold mb-4">
                                 Resources
                             </h6>
@@ -80,7 +80,7 @@ function Footer() {
                                 <a href="#!" className="text-reset">Partner</a>
                             </p>
                         </div>
-                        <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 mt-5">
                             <h6 className="text-uppercase fw-bold mb-4">Get in Touch With Us</h6>
                             <p><i className="fas fa-home me-3"></i> Sri Lanka, Colombo, Homagama</p>
                             <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
