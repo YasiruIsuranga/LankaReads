@@ -1,0 +1,39 @@
+.search-bar .input-group-prepend .btn {
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    height: 40px;
+}
+  
+  .search-bar .input-group-prepend .btn:hover {
+    background-color: #FF4500;
+  }
+  
+  .search-bar .input-group .form-control {
+    border: none;
+    max-width: 100px;
+  }
+  
+  .search-bar .input-group-append .btn {
+    border: none;
+  }
+  
+  .search-bar .input-group-append .btn i {
+    font-size: 1.2rem;
+  }
+  
+  .search-input{
+    max-width: 350px;
+  }
+
+  .btnsearch {
+    background-color: #f42d00;
+    border-color: #f42d00;
+    color: white;
+    border-radius: 15%;
+}
+
+.btnsearch:hover {
+    border: 2px solid #f42d00;
+    border-color: #f42d00;
+}
