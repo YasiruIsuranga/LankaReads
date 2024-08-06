@@ -3,7 +3,7 @@
     color: white;
     border: none;
     height: 40px;
-  }
+}
   
   .search-bar .input-group-prepend .btn:hover {
     background-color: #FF4500;
@@ -26,7 +26,14 @@
     max-width: 350px;
   }
 
-  .search-btn{
-    background-color: #FF6347;
-    color: #FF6347;
-  }
+  .btnsearch {
+    background-color: #f42d00;
+    border-color: #f42d00;
+    color: white;
+    border-radius: 15%;
+}
+
+.btnsearch:hover {
+    border: 2px solid #f42d00;
+    border-color: #f42d00;
+}

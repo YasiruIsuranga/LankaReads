@@ -28,7 +28,7 @@ function Recomended() {
                                 <div className="card-body">
                                     <h5 className="card-title">{book.title}</h5>
                                     <p className="card-text">{book.price}</p>
-                                    <button className="btn btn1">Add To Cart</button>
+                                    <button className="btn btncart">Add To Cart</button>
                                 </div>
                             </div>
                         </div>

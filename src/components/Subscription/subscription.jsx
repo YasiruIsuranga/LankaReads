@@ -14,7 +14,7 @@ function Subscription() {
             <div className="col-md-6 text-center text-md-start">
                 <form className="d-flex justify-content-center">
                     <input type="email" className="form-control me-2" placeholder="Your Email Address" style={{ maxWidth: '300px' }} />
-                    <button type="submit" className="btn btn1">SUBSCRIBE</button>
+                    <button type="submit" className="btn btnsubscribe">SUBSCRIBE</button>
                 </form>
             </div>
         </div>

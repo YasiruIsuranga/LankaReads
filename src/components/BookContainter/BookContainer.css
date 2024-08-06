@@ -1,0 +1,21 @@
+.backgrounds2{
+    margin-top: 0%;
+    padding-top: 0;
+    padding: 20px;
+}
+.add-btn{
+    max-width: 100px;
+    font-size: 13px;
+    background-color: #f42d00;
+    border-color: #f42d00;
+    color: white;
+    border-radius: 15%;
+}
+.add-btn:hover{
+    border: 2px solid #f42d00;
+    background-color: white;
+}
+.book-container{
+    display: flex;
+    justify-content: center;
+}
