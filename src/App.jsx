@@ -10,6 +10,7 @@ import Authors from './pages/Authors/Authors';
 import Blogs from './pages/Blogs/Blogs';
 import Register from './pages/Register/Register';
 import Payment from './pages/Payment/Payment';
+import OpenPage from './pages/OpenPage/OpenPage';
 
 function App() {
 
@@ -17,7 +18,20 @@ function App() {
     <>
     <div className='app-container'>
 
-      <Payment/>
+    <Routes>
+        <Route>
+          <Route index element={<Home />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/About' element={<About />} />
+          <Route path='/Books' element={<Books />} />
+          <Route path='/Contact' element={<Contact />} />
+          <Route path='/Authors' element={<Authors />} />
+          <Route path='/Blogs' element={<Blogs />} />
+          <Route path='/Register' element={<Register />} />
+          <Route path='/OpenPage' element={<OpenPage />} />
+          <Route path='/Payment' element={<Payment />} />
+        </Route>
+      </Routes>
     </div>
     </>
   )

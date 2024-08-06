@@ -28,7 +28,7 @@ function OpenPage() {
               <h3 className="mb-4">$19.99</h3>
               <div className="d-flex gap-3 flex-column flex-md-row">
                 <button className="btn btn11 mb-2 mb-md-0">Add to Cart</button>
-                <button className="btn btn1">Pay Now</button>
+                <a href="/Payment"><button className="btn pay-btn">Pay Now</button></a>
               </div>
             </div>
           </div>

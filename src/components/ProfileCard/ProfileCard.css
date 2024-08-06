@@ -1,14 +1,16 @@
-.card {
+.P-card {
     border: none;
+    margin-left: 5px;
   }
   
   .card-title {
-    font-size: 1.25rem;
+    font-size: 15px;
     font-weight: bold;
   }
   
   .card-text {
     color: gray;
+    font-size: 12px;
   }
   
   

@@ -4,10 +4,10 @@ import ProPic from '../../img/PP.png'
 
 const ProfileCard = () => {
   return (
-    <div className="card mb-3" style={{ maxWidth: '540px', border: 'none' }}>
-      <div className="row g-0">
+    <div className="col-4 d-flex flex-row P-card">
+      <div className="row g-0 d-flex align-items-center justify-content-between">
         <div className="col-md-3 pro-pic">
-          <img src={ProPic} style={{ maxWidth: '100px', borderRadius:'50px' }} alt="User" />
+          <img src={ProPic} style={{ maxWidth: '40px', borderRadius:'50px' }} alt="User" />
         </div>
         <div className="col-md-8">
           <div className="card-body">

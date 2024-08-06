@@ -18,7 +18,7 @@ function Home() {
     <div className='home-page' >
       <div className='col-lg-12 d-flex flex-row align-items-center justify-content-between'>
         <div className='col-lg-4'>
-        <ProfileCard />
+        {/* <ProfileCard /> */}
         </div>
         <div className='col-lg-4'>
           <SearchBar />

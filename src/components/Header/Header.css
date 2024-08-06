@@ -1,6 +1,9 @@
+
 .logo1 {
-    width: 150px;
+    width: 140px;
     height: auto;
+    margin: 0px;
+    margin-top: 0;
 }
 
 .navbar-nav .nav-link {
@@ -99,3 +102,19 @@
     margin-top: 120px;
 }
 
+.btn11 {
+    background-color:  #f42d00;
+    color:white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    
+}
+
+.btn11:hover {
+    
+    transform: scale(1.05);
+    border:1px solid #f42d00; 
+    border-radius: 20px;
+    
+}

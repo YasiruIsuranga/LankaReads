@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 import logo from "../../img/logo1.png";
 import { FaBars } from 'react-icons/fa';
+import ProfileCard from '../ProfileCard/ProfileCard'
 
 function Header() {
 
   return (
     <>
-      <header className="container-fluid bg-white sticky-top">
+      <header className="container-fluid bg-white sticky-top" style={{maxHeight:'140px'}}>
         <div className="container-fluid">
           <div className="row align-items-center py-2">
             <div className="col d-flex align-items-center">
@@ -46,7 +47,8 @@ function Header() {
                   <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z"/>
                 </svg>
               </a>
-              <button className="px-3 btn btngetintouch ms-3">Get in Touch</button>
+              {/* <button className="px-3 btn btngetintouch ms-3">Get in Touch</button> */}
+              <ProfileCard />
             </div>
           </div>
         </div>
@@ -65,7 +67,7 @@ function Header() {
       {/* Add more cart items here */}
     </div>
     {/* Continue Shopping button at the bottom */}
-    <button className="btn btn1 mt-auto">Continue Shopping</button>
+    <button className="btn btn11 mt-auto">Continue Shopping</button>
   </div>
 </div>
 

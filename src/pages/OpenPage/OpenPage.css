@@ -28,10 +28,10 @@
   }
   
   /* Optional: Additional margin for the header and footer if needed */
-  header, footer {
+  /* header, footer {
     margin-bottom: 2rem;
-  }
-  .btn1 {
+  } */
+  .pay-btn {
     background-color: #f42d00;
     color: #fff;
     padding: 8px 16px;
@@ -39,21 +39,25 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     border: none;
 }
+.pay-btn:hover{
+  color: black;
+  border: 1px solid #f42d00;
+}
 
 .btn1:hover {
     background-color: #d02000;
     transform: scale(1.05);
 }
- .btn111 {
-    background-color: #ffffff;
-    color: #f42d00;
+ .btn11 {
+    background-color:  #f42d00;
+    color:white;
     padding: 8px 16px;
     border-radius: 20px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     
 }
 
-.btn111:hover {
+.btn11:hover {
     
     transform: scale(1.05);
     border:1px solid #f42d00; 
