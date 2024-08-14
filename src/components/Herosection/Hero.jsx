@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Hero.css';
 import image1 from '../../img/Kutse.jpg'
-import image2 from '../../img/book2.jpg'
-import image3 from '../../img/mgmt-matters-teamwork-katleho-Seisa-GettyImages.jpg'
-import image4 from '../../img/main.jpeg'
+import image3 from '../../img/wallpaper2.webp'
+import image4 from '../../img/wallpaper1.jpg'
 import CardSlider from '../CardSlider/CardSlider';
 
 
 const images = [
   image1,
-   image2,
    image3,
   image4
 ];

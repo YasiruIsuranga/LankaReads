@@ -16,7 +16,7 @@ function Contact() {
             </div>
          <div className="container my-5"style={{ boxShadow: '0px 10px 40px rgba(244, 45, 0, 0.2)' }}>
             <h1 className="text-center mb-4" style={{ color: '#f42d00' }}>Contact Us</h1>
-            <div className="row">
+            <div className="row ms-3">
                 <div className="col-md-6">
                     <h3 className="mb-3">Get in Touch</h3>
                     <p className="mb-4">Feel free to reach out to us for any inquiries, suggestions, or feedback. We would love to hear from you!</p>
