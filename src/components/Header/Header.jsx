@@ -22,7 +22,7 @@ function Header() {
                 <FaBars size={24} />
               </button>
               {/* Large screen menu */}
-              <nav className="navbar navbar-expand-lg navbar-light d-none d-lg-flex ms-4">
+              <nav className="navbar navbar-expand-lg navbar-light d-none d-lg-flex ms-4 align-items-center">
                 <div className="collapse navbar-collapse">
                   <ul className="navbar-nav">
                     <li className="nav-item"><a className="nav-link px-4" href="/">Home</a></li>
@@ -35,9 +35,8 @@ function Header() {
                   </ul>
                 </div>
               </nav>
-            </div>
             <div className="col d-flex justify-content-end align-items-center">
-              <a href="#" className="text-dark px-3 py-3">
+              <a href="#" className="text-dark px-3 py-3" data-bs-toggle="offcanvas" data-bs-target="#WishOffcanvas" aria-controls="WishOffcanvas">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
                   <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                 </svg>
@@ -50,6 +49,7 @@ function Header() {
               {/* <button className="px-3 btn btngetintouch ms-3">Get in Touch</button> */}
               <ProfileCard />
             </div>
+            </div>
           </div>
         </div>
       </header>
@@ -58,6 +58,22 @@ function Header() {
       <div className="offcanvas offcanvas-end w-45" tabIndex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
   <div className="offcanvas-header">
     <h5 className="offcanvas-title" id="cartOffcanvasLabel">Shopping Cart</h5>
+    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div className="offcanvas-body d-flex flex-column">
+    {/* Cart contents */}
+    <div>
+      <p>No products in the cart.</p>
+      {/* Add more cart items here */}
+    </div>
+    {/* Continue Shopping button at the bottom */}
+    <button className="btn btn11 mt-auto">Continue Shopping</button>
+  </div>
+</div>
+
+<div className="offcanvas offcanvas-end w-45" tabIndex="-1" id="WishOffcanvas" aria-labelledby="WishOffcanvasLabel">
+  <div className="offcanvas-header">
+    <h5 className="offcanvas-title" id="cartOffcanvasLabel">Wish List</h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body d-flex flex-column">
