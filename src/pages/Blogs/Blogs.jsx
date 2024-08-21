@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
+import ScrollTop from '../../components/Scroll-top/ScrollTop'
 import Footer from '../../components/Footer/footer';
 
 
@@ -114,6 +115,7 @@ function Blogs() {
                 </div>
                 
             </div>
+            <ScrollTop/>
             <Footer/>
         </>
     );

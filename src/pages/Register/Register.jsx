@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/footer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
+import ScrollTop from '../../components/Scroll-top/ScrollTop';
 
 function Register() {
     const [showLogin, setShowLogin] = useState(false);
@@ -130,6 +131,7 @@ function Register() {
                     </div>
                 </div>
             )}
+            <ScrollTop/>
             <Footer />
         </div>
     );

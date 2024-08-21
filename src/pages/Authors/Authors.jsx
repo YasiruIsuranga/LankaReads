@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
+import ScrollTop from '../../components/Scroll-top/ScrollTop'
 import Footer from '../../components/Footer/footer'
 
 function Authors() {
@@ -7,6 +8,7 @@ function Authors() {
     <>
     <Header />
     <div>Authors</div>
+    <ScrollTop/>
     <Footer />
     </>
   )

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/footer';
 import './OpenPage.css';  
+import ScrollTop from '../../components/Scroll-top/ScrollTop';
 function OpenPage() {
   return (
     <div className="open-pages">
@@ -34,7 +35,7 @@ function OpenPage() {
           </div>
         </div>
       </div>
-
+    <ScrollTop/>
       <Footer />
     </div>
   );

@@ -1,9 +1,42 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
+import ScrollTop from '../../components/Scroll-top/ScrollTop'
 import Footer from '../../components/Footer/footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2'
 
-function Contact() {
+const  Contact = () => {
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "c019b380-8b27-429e-964e-7f3bf6754a84");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    }).then((res) => res.json());
+
+    if (res.success) {
+      Swal.fire({
+        title: "Success!",
+        text: "Message has sent successfully!",
+        icon: "success"
+      });
+    }
+  
+  };
+
+
+
   return (
     <>
     <Header />
@@ -20,36 +53,22 @@ function Contact() {
                 <div className="col-md-6">
                     <h3 className="mb-3">Get in Touch</h3>
                     <p className="mb-4">Feel free to reach out to us for any inquiries, suggestions, or feedback. We would love to hear from you!</p>
-                    <form>
+                   
+   <form onSubmit={onSubmit}>
   <div className="mb-4">
     <label htmlFor="name" className="form-label">Name</label>
-    <input type="text" className="form-control" id="name" placeholder="Enter your name" />
+    <input type="text" className="form-control" id="name" placeholder="Enter your name" name='name' required />
   </div>
   <div className="mb-4">
     <label htmlFor="email" className="form-label">Email</label>
-    <input type="email" className="form-control" id="email" placeholder="Enter your email" />
+    <input type="email" className="form-control" id="email" placeholder="Enter your email" name='email'  required />
   </div>
+  
   <div className="mb-4">
-    <label htmlFor="phone" className="form-label">Phone Number</label>
-    <div className="input-group">
-      <select className="form-select" style={{ maxWidth: '150px', marginRight: '10px' }}>
-        <option value="+1">USA (+1)</option>
-        <option value="+44">UK (+44)</option>
-        <option value="+91">India (+91)</option>
-        <option value="+94">Sri Lanka (+94)</option>
-        <option value="+61">Australia (+61)</option>
-        <option value="+81">Japan (+81)</option>
-        <option value="+49">Germany (+49)</option>
-        
-      </select>
-      <input type="tel" className="form-control" id="phone" placeholder="Enter your phone number" />
-    </div>
+    <label htmlFor="message"  className="form-label" >Message</label>
+    <textarea className="form-control" name="message" rows="4" placeholder="Enter your message"  required></textarea>
   </div>
-  <div className="mb-4">
-    <label htmlFor="message" className="form-label">Message</label>
-    <textarea className="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
-  </div>
-  <button type="submit" className="btn btn1">Submit</button>
+  <button type="submit" className="btn btn-danger">Submit</button>
 </form>
 <br />
                 </div>
@@ -85,6 +104,7 @@ function Contact() {
                 <br />
             </div>
         </div></div>
+        <ScrollTop/>
     <Footer />
     </>
   )
