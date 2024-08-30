@@ -1,0 +1,148 @@
+/* Base Styles */
+.open-pages {
+  background-color: #f8f9fa; /* Light background color for the page */
+  min-height: 100vh;
+  color: #212529; /* Default text color */
+}
+
+.cards {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #ffffff; /* White background for the card */
+  max-width: 80%; /* Adjusted to 80% width */
+  margin: 0 auto; /* Center align the cards */
+}
+
+/* Book Image */
+.img-fluid {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Base Styles */
+.text-muted {
+  color: #6c757d; /* Default muted text color */
+}
+
+
+/* Headings */
+h2, h3 {
+  margin-bottom: 1rem;
+}
+
+/* Container Padding */
+.container {
+  padding: 0;
+}
+
+/* Buttons */
+.pay-btn {
+  background-color: #f42d00;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+}
+
+.pay-btn:hover {
+  color: black;
+  border: 1px solid #f42d00;
+}
+
+.add-btn {
+  background-color: #f42d00;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-btn:hover {
+  transform: scale(1.05);
+  border: 1px solid #f42d00;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .cards {
+    padding: 1.5rem;
+    max-width: 90%; /* Adjusted to 90% width */
+  }
+
+  .img-fluid {
+    max-width: 80%;
+  }
+
+  .add-btn, .pay-btn {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    padding: 1rem;
+    max-width: 100%; /* Full width on small screens */
+  }
+
+  .img-fluid {
+    max-width: 90%;
+  }
+
+  .add-btn, .pay-btn {
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .cards {
+    padding: 0.5rem;
+    max-width: 100%; /* Full width on very small screens */
+  }
+
+  .img-fluid {
+    max-width: 100%;
+  }
+
+  .add-btn, .pay-btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .open-pages {
+  background-color: #343a40; /* Dark background color for the page */
+  color: #fff; /* Text color for dark mode */
+}
+body.dark-mode .bookdes {
+ 
+  color: #fff; /* Text color for dark mode */
+}
+
+body.dark-mode .cards {
+  background-color: #495057; /* Darker background color for the card */
+  box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.2); /* Lighter shadow for dark mode */
+}
+
+body.dark-mode .pay-btn {
+  background-color: #ff6f6f; /* Dark mode button color */
+  color: #fff;
+}
+
+body.dark-mode .pay-btn:hover {
+  background-color: #e05656;
+  border: 1px solid #ff6f6f;
+}
+
+body.dark-mode .add-btn {
+  background-color: #ff6f6f; /* Dark mode button color */
+}
+
+body.dark-mode .add-btn:hover {
+  border: 1px solid #ff6f6f;
+}
+/* Dark Mode Styles */
+body.dark-mode .text-muted {
+  color: #adb5bd; /* Lighter muted text color for dark mode */
+}

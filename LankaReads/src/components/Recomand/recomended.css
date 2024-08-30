@@ -1,0 +1,163 @@
+/* General background and text styling */
+.recommended-section {
+    background-color: #f7f7f7; /* Light background for contrast */
+    color: #333; /* Dark text color for readability */
+    padding: 40px 20px; /* Padding for spacing */
+    text-align: center; /* Center text and content */
+}
+
+.container {
+    max-width: 80%; /* Restrict container width to 80% */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Title styling */
+.recommended-title {
+    color: #f42d00; /* Highlighted heading color */
+    font-size: 1.5rem; /* Scaled down font size for emphasis */
+    margin-bottom: 30px; /* Spacing below heading */
+    font-weight: bold; /* Bold heading for impact */
+}
+
+/* Card styling */
+.book-card {
+    border: none; /* No border for a clean look */
+    border-radius: 16px; /* Rounded corners for a modern look */
+    overflow: hidden; /* Hide overflow for a neat appearance */
+    background-color: #fff; /* White background for the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.book-card:hover {
+    transform: scale(1.05); /* Slightly increased scale on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Image styling */
+.book-img {
+    max-height: 250px; /* Height for the image */
+    object-fit: cover; /* Ensure image covers the area */
+    border-bottom: 2px solid #f42d00; /* Border below the image */
+}
+
+/* Card body styling */
+.book-body {
+    padding: 20px; /* Padding inside the card body */
+    display: flex; /* Flexbox layout for better alignment */
+    flex-direction: column; /* Stack children vertically */
+    height: 100%; /* Full height to push footer to the bottom */
+}
+
+.book-title {
+    font-size: 1.1rem; /* Slightly smaller font size for titles */
+    color: #333; /* Dark color for readability */
+    margin-bottom: 10px; /* Spacing below title */
+    font-weight: bold; /* Bold title for emphasis */
+}
+
+/* Footer styling */
+.book-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.book-price {
+    font-size: 1rem; /* Slightly smaller font size for price */
+    color: #555; /* Slightly lighter color for price */
+    margin-bottom: 10px; /* Spacing below price */
+}
+
+.add-to-cart-btn {
+    background-color: #f42d00; /* Button background color */
+    border-color: #f42d00; /* Button border color */
+    color: white; /* Button text color */
+    border-radius: 20px; /* Rounded corners for the button */
+    padding: 8px 16px; /* Scaled down padding inside the button */
+    font-size: 1rem; /* Scaled down font size for button text */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transition effects */
+    border: 2px solid transparent; /* Transparent border to adjust hover effect */
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e62b00; /* Darker background color on hover */
+    border-color: #e62b00; /* Darker border color on hover */
+    color: white; /* Button text color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .container {
+        max-width: 90%; /* Wider container on medium screens */
+    }
+
+    .recommended-title {
+        font-size: 1.4rem; /* Slightly smaller font size for medium screens */
+    }
+
+    .book-title {
+        font-size: 1rem; /* Slightly smaller title font size */
+    }
+
+    .add-to-cart-btn {
+        padding: 6px 12px; /* Adjusted padding for smaller screens */
+        font-size: 0.9rem; /* Slightly smaller font size */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Full width container on small screens */
+    }
+
+    .recommended-title {
+        font-size: 1.2rem; /* Further reduced font size for small screens */
+    }
+
+    .book-card {
+        margin-bottom: 20px; /* More spacing between cards */
+    }
+
+    .book-title {
+        font-size: 0.9rem; /* Further reduced title font size */
+    }
+
+    .add-to-cart-btn {
+        padding: 4px 8px; /* Further reduced padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+}
+
+/* Dark mode styles */
+body.dark-mode .recommended-section {
+    background-color: #1e1e1e; /* Dark background for dark mode */
+    color: #d1d1d1; /* Light text color for readability */
+}
+
+body.dark-mode .book-card {
+    background-color: #2b2b2b; /* Dark background for cards */
+    color: #ffffff; /* Light text color for readability */
+}
+
+body.dark-mode .book-title, 
+body.dark-mode .book-price {
+    color: #ffffff; /* Light color for text in dark mode */
+}
+
+body.dark-mode .add-to-cart-btn {
+    background-color: #f42d00; /* Button background color for dark mode */
+    border-color: #f42d00; /* Button border color for dark mode */
+    color: white; /* Button text color */
+}
+
+body.dark-mode .add-to-cart-btn:hover {
+    background-color: #e62b00; /* Darker background color on hover */
+    border-color: #e62b00; /* Darker border color on hover */
+    color: white; /* Button text color */
+}
+
+body.dark-mode .book-img {
+    border-bottom: 1px solid #f42d00; /* Border below the image in dark mode */
+}

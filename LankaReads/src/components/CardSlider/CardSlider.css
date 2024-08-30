@@ -1,0 +1,179 @@
+/* Carousel item styling */
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card slider container */
+.card-slider-container {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Carousel item padding */
+.card-slider-container .carousel-item {
+  padding: 10px; /* Reduced padding to fit the content better */
+}
+
+/* Book card styling */
+.book-card {
+  width: 200px; /* Fixed width for all cards */
+  height: auto; /* Adjust height automatically based on content */
+  margin: 10px; /* Space between cards */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover {
+  transform: scale(1.03); /* Slightly scaled up on hover */
+}
+
+/* Card image styling */
+.card-image {
+  width: 100%; /* Ensure the image takes full width of the card */
+  height: 130px; /* Set a fixed height for images */
+  object-fit: cover; /* Cover the card area */
+}
+
+/* Card body styling */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px; /* Reduced padding inside card body */
+}
+
+/* Card title row styling */
+.card-title-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px; /* Reduced margin below title */
+}
+
+/* Card title styling */
+.card-title {
+  margin: 0;
+  font-size: 14px; /* Reduced font size */
+  white-space: nowrap; /* Ensure title stays in one line */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis if text is too long */
+}
+
+/* Card details row styling */
+.card-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Card price styling */
+.card-price {
+  margin: 0;
+  font-size: 12px; /* Reduced font size */
+}
+
+/* Button styling */
+.btn-visit {
+  font-size: 12px; /* Reduced font size */
+  padding: 6px 12px; /* Adjusted padding for smaller buttons */
+  margin: 0;
+  border: none; /* Remove border */
+  background-color: #f42d00; /* Button background color */
+  color: white; /* Button text color */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.btn-visit:hover {
+  background-color: #e62b00; /* Darker background color on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-slider-container .carousel-item {
+    padding: 8px; /* Further reduced padding */
+  }
+
+  .book-card {
+    width: 180px; /* Adjusted width for medium screens */
+  }
+
+  .card-image {
+    height: 110px; /* Adjust image height for medium screens */
+  }
+
+  .card-title {
+    font-size: 13px; /* Slightly smaller font size for medium screens */
+  }
+
+  .card-price {
+    font-size: 11px; /* Slightly smaller font size for medium screens */
+  }
+
+  .btn-visit {
+    font-size: 11px; /* Slightly smaller font size for medium screens */
+    padding: 5px 10px; /* Adjusted padding for medium screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .book-card {
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .card-image {
+    height: 90px; /* Adjust image height for small screens */
+  }
+
+  .card-title {
+    font-size: 12px; /* Further reduced font size for small screens */
+  }
+
+  .card-price {
+    font-size: 10px; /* Further reduced font size for small screens */
+  }
+
+  .btn-visit {
+    font-size: 10px; /* Further reduced font size */
+    padding: 4px 8px; /* Further adjusted padding */
+  }
+}
+
+/* Dark mode styles */
+body.dark-mode .book-card {
+  background-color: #2b2b2b; /* Dark background for cards */
+  color: #ffffff; /* Light text color */
+  border: 1px solid #444; /* Darker border for dark mode */
+}
+
+body.dark-mode .card-title {
+  color: #ffffff; /* Light color for title in dark mode */
+}
+
+body.dark-mode .card-price {
+  color: #d1d1d1; /* Lighter color for price in dark mode */
+}
+
+body.dark-mode .btn-visit {
+  background-color: #e62b00; /* Darker button background color for dark mode */
+  border-color: #e62b00; /* Darker button border color for dark mode */
+  color: white; /* Button text color */
+}
+
+body.dark-mode .btn-visit:hover {
+  background-color: #c54c00; /* Even darker background color on hover */
+  border-color: #c54c00; /* Even darker border color on hover */
+}
+
+body.dark-mode .card-image {
+  border-bottom: 1px solid #f42d00; /* Border below the image in dark mode */
+}

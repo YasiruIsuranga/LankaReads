@@ -1,0 +1,166 @@
+/* Default light mode styles */
+.register-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.register-form-container {
+    width: 80%; /* Scaled down to 80% of the viewport width */
+    max-width: 500px; /* Maximum width for the form */
+    padding: 20px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+    background: white;
+    border-radius: 12px; /* Rounded corners */
+    margin: auto; /* Centering the container */
+}
+
+.register-form-container h2 {
+    font-size: 1.5rem; /* Scaled-down title size */
+    margin-bottom: 1.25rem;
+    color: #333; /* Darker text color */
+}
+
+.register-form-container .form-group {
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.register-form-container .form-control {
+    font-size: 0.875rem; /* Smaller input text size */
+    padding: 0.75rem; /* Adjusted padding */
+}
+
+.register-form-container .btn-danger {
+    background-color: #f42d00;
+    border-color: #f42d00;
+    font-size: 0.875rem; /* Smaller button text */
+    padding: 0.75rem; /* Adjusted button padding */
+}
+
+.register-form-container .btn-danger:hover {
+    background-color: #e02a00;
+    border-color: #e02a00;
+}
+
+/* Dark mode styles */
+body.dark-mode .register-section {
+    background-color: #343a40; /* Dark background color */
+}
+
+body.dark-mode .register-form-container {
+    background: #495057; /* Darker background for form */
+    box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .register-form-container h2 {
+    color: #f8f9fa; /* Light text color */
+}
+
+body.dark-mode .register-form-container .btn-danger {
+    background-color: #ff6f6f;
+    border-color: #ff6f6f;
+}
+
+body.dark-mode .register-form-container .btn-danger:hover {
+    background-color: #e05656;
+    border-color: #e05656;
+}
+
+/* Login modal styles */
+.modal-dialog {
+    max-width: 80%; /* Scaled down to 80% of the viewport width */
+}
+
+.modal-content {
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.close-button {
+    font-size: 1.25rem;
+    color: #f42d00; /* Custom close button color */
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal-body .form-control {
+    font-size: 0.875rem; /* Smaller input text size */
+    padding: 0.75rem; /* Adjusted padding */
+}
+
+.modal-body .btn-danger {
+    background-color: #f42d00;
+    border-color: #f42d00;
+    font-size: 0.875rem; /* Smaller button text */
+    padding: 0.75rem; /* Adjusted button padding */
+}
+
+.modal-body .btn-danger:hover {
+    background-color: #e02a00;
+    border-color: #e02a00;
+}
+
+.modal-body .text-center a {
+    color: #f42d00; /* Link color */
+}
+
+.modal-body .text-center a:hover {
+    color: #e02a00; /* Link hover color */
+}
+
+/* Dark mode styles for the login modal */
+body.dark-mode .modal-content {
+    background: #495057; /* Darker background for modal */
+    box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .modal-body {
+    color: #f8f9fa; /* Light text color */
+}
+
+body.dark-mode .modal-body .btn-danger {
+    background-color: #ff6f6f;
+    border-color: #ff6f6f;
+}
+
+body.dark-mode .modal-body .btn-danger:hover {
+    background-color: #e05656;
+    border-color: #e05656;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .register-form-container {
+        width: 90%; /* Adjust for smaller screens */
+        padding: 15px;
+    }
+
+    .modal-dialog {
+        max-width: 90%; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .register-form-container {
+        width: 100%; /* Full width for very small screens */
+        padding: 10px;
+    }
+
+    .modal-dialog {
+        max-width: 100%; /* Full width for very small screens */
+    }
+}
