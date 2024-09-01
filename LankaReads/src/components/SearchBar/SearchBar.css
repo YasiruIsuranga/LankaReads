@@ -63,3 +63,15 @@
 .dropdown-menu {
   width: 100%;
 }
+.search-bar {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  margin-right: 5px; /* Adding a small gap between search icon and text area */
+}
+
+.btnsearch {
+  padding: 0.375rem 0.75rem;
+}

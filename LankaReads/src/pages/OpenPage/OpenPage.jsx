@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/footer';
@@ -6,16 +6,20 @@ import './OpenPage.css';
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../contexts/CartContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 function OpenPage() {
-  const { bookId } = useParams(); // Extract bookId from URL parameters
+  const { bookId } = useParams();
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
+  const { addToCart } = useContext(CartContext);
+  const { isDarkMode } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/books/${bookId}`); // Fetch book details by ID
+        const response = await axios.get(`http://localhost:5000/api/books/${bookId}`);
         setBook(response.data);
       } catch (error) {
         console.error('Error fetching book details:', error);
@@ -26,45 +30,72 @@ function OpenPage() {
     fetchBookDetails();
   }, [bookId]);
 
-  return (
-    <div className="open-page">
-      <Header />
+  const handleAddToCart = () => {
+    if (book) {
+      addToCart(book);
+    }
+  };
 
+  const handlePayNow = async () => {
+    try {
+      const amount = book.price * 100; // Convert to cents
+      const response = await axios.post('http://localhost:5000/create-checkout-session', {
+        amount,
+        bookId
+      });
+      const sessionUrl = response.data.url;
+      window.location.href = sessionUrl;
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      alert('There was an issue with the checkout. Please try again later.');
+    }
+  };
+
+  return (
+    <div className={`open-pages ${isDarkMode ? 'dark-mode' : ''}`}>
+      <Header />
       <div className="container mt-5 mb-5">
         {error && <div className="alert alert-danger" role="alert">{error}</div>}
         {book ? (
-          <div className="row shadow-lg rounded border-0 p-4 bg-light">
+          <div className="row book-details-card shadow-lg rounded border-0 p-4">
             {/* Book Image Column */}
             <div className="col-md-6 d-flex justify-content-center align-items-center">
               <img
-                src={book.image} // Use dynamic book image
+                src={book.image}
                 alt={`${book.name} Cover`}
-                className="img-fluid rounded"
-                style={{ maxHeight: '400px', objectFit: 'cover' }} // Adjust image styling
+                className="book-image img-fluid rounded"
+                style={{ maxHeight: '400px', objectFit: 'cover' }}
               />
             </div>
 
             {/* Book Information Column */}
             <div className="col-md-6 d-flex flex-column justify-content-center">
-              <h2 className="mb-3">{book.name}</h2>
-              <p className="lead mb-4">Author: {book.author}</p>
-              <p className="text-muted mb-4">{book.description}</p>
-              <h3 className="mb-4">${book.price.toFixed(2)}</h3>
-              <div className="d-flex gap-3 flex-column flex-md-row">
-                <button className="btn btn-primary mb-2 mb-md-0">Add to Cart</button>
-                <a href="/Payment" className="btn btn-success">
+              <h2 className="heading-secondary mb-3">{book.name}</h2>
+              <p className="book-author">Author: {book.author}</p>
+              <p className="book-price">Price: ${book.price.toFixed(2)}</p>
+              <p className="book-description">{book.description}</p>
+              <div className="d-flex gap-2">
+                <button
+                  className="btn btn-primary flex-fill"
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </button>
+                <button
+                  className="btn btn-success flex-fill"
+                  onClick={handlePayNow}
+                >
                   Pay Now
-                </a>
+                </button>
               </div>
             </div>
           </div>
         ) : (
-          <p>Loading book details...</p>
+          <div className="alert alert-info" role="alert">Loading book details...</div>
         )}
       </div>
-
-      <ScrollTop />
       <Footer />
+      <ScrollTop />
     </div>
   );
 }

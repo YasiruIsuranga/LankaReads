@@ -5,28 +5,21 @@
   color: #212529; /* Default text color */
 }
 
-.cards {
-  padding: 2rem;
-  border-radius: 1rem;
+.book-details-card {
   background-color: #ffffff; /* White background for the card */
-  max-width: 80%; /* Adjusted to 80% width */
-  margin: 0 auto; /* Center align the cards */
 }
 
-/* Book Image */
-.img-fluid {
+.book-image {
   max-width: 100%;
   height: auto; /* Maintain aspect ratio */
 }
 
-/* Base Styles */
 .text-muted {
   color: #6c757d; /* Default muted text color */
 }
 
-
 /* Headings */
-h2, h3 {
+.heading-secondary {
   margin-bottom: 1rem;
 }
 
@@ -36,113 +29,118 @@ h2, h3 {
 }
 
 /* Buttons */
-.pay-btn {
-  background-color: #f42d00;
-  color: #fff;
+.btn-primary, .btn-success {
   padding: 8px 16px;
   border-radius: 20px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   border: none;
 }
 
-.pay-btn:hover {
-  color: black;
-  border: 1px solid #f42d00;
-}
-
-.add-btn {
+.btn-primary {
   background-color: #f42d00;
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.add-btn:hover {
-  transform: scale(1.05);
+.btn-primary:hover {
+  background-color: #e03d00;
   border: 1px solid #f42d00;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border: 1px solid #28a745;
 }
 
 /* Responsive Styles */
 @media (max-width: 992px) {
-  .cards {
+  .book-details-card {
     padding: 1.5rem;
     max-width: 90%; /* Adjusted to 90% width */
   }
 
-  .img-fluid {
+  .book-image {
     max-width: 80%;
   }
 
-  .add-btn, .pay-btn {
+  .btn-primary, .btn-success {
     padding: 6px 12px;
   }
 }
 
 @media (max-width: 768px) {
-  .cards {
+  .book-details-card {
     padding: 1rem;
     max-width: 100%; /* Full width on small screens */
   }
 
-  .img-fluid {
+  .book-image {
     max-width: 90%;
   }
 
-  .add-btn, .pay-btn {
+  .btn-primary, .btn-success {
     padding: 5px 10px;
   }
 }
 
 @media (max-width: 576px) {
-  .cards {
+  .book-details-card {
     padding: 0.5rem;
     max-width: 100%; /* Full width on very small screens */
   }
 
-  .img-fluid {
+  .book-image {
     max-width: 100%;
   }
 
-  .add-btn, .pay-btn {
+  .btn-primary, .btn-success {
     padding: 4px 8px;
     font-size: 0.8rem;
   }
 }
 
 /* Dark Mode Styles */
-body.dark-mode .open-pages {
-  background-color: #343a40; /* Dark background color for the page */
-  color: #fff; /* Text color for dark mode */
-}
-body.dark-mode .bookdes {
- 
-  color: #fff; /* Text color for dark mode */
+.dark-mode .open-pages {
+  background-color: #1e1e1e; /* Dark background color for the page */
+  color: #e0e0e0; /* Light text color for dark mode */
 }
 
-body.dark-mode .cards {
-  background-color: #495057; /* Darker background color for the card */
-  box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.2); /* Lighter shadow for dark mode */
+.dark-mode .book-details-card {
+  background-color: #2e2e2e; /* Darker background color for the card */
+  border: 1px solid #444; /* Subtle border for dark mode */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
 }
 
-body.dark-mode .pay-btn {
+.dark-mode .btn-primary {
   background-color: #ff6f6f; /* Dark mode button color */
-  color: #fff;
 }
 
-body.dark-mode .pay-btn:hover {
+.dark-mode .btn-primary:hover {
   background-color: #e05656;
   border: 1px solid #ff6f6f;
 }
 
-body.dark-mode .add-btn {
-  background-color: #ff6f6f; /* Dark mode button color */
+.dark-mode .btn-success {
+  background-color: #60c5ba; /* Dark mode button color */
 }
 
-body.dark-mode .add-btn:hover {
-  border: 1px solid #ff6f6f;
+.dark-mode .btn-success:hover {
+  background-color: #4ab89e;
+  border: 1px solid #60c5ba;
 }
-/* Dark Mode Styles */
-body.dark-mode .text-muted {
+
+.dark-mode .text-muted {
   color: #adb5bd; /* Lighter muted text color for dark mode */
+}
+
+.dark-mode .heading-secondary {
+  color: #e0e0e0; /* Light color for headings in dark mode */
+}
+
+.dark-mode .book-image {
+  filter: brightness(0.9); /* Slightly dim images in dark mode */
 }

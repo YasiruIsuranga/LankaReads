@@ -1,16 +1,73 @@
-.P-card {
-    border: none;
-    margin-left: 5px;
+/* Container for the profile card */
+
+
+/* Inner structure of the profile card */
+.profile-card-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Profile picture styling */
+.profile-pic-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-pic {
+  max-width: 40px;
+  border-radius: 50%;
+}
+
+/* Profile info styling */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card-body {
+  padding: 10px;
+}
+
+.profile-card-title {
+  font-size: 16px; /* Adjusted size for better readability */
+  font-weight: bold;
+  margin-bottom: 5px; /* Added space between title and text */
+  transition: color 0.3s; /* Smooth transition for dark mode */
+}
+
+.profile-card-text {
+  color: gray;
+  font-size: 14px; /* Adjusted size for better readability */
+  transition: color 0.3s; /* Smooth transition for dark mode */
+}
+
+/* Dark mode styles */
+.dark-mode .profile-card-title {
+  color: #f0f0f0; /* Light color for dark mode */
+}
+
+.dark-mode .profile-card-text {
+  color: #b0b0b0; /* Light gray for dark mode */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .profile-card-container {
+    margin-left: 0; /* Remove margin on small screens */
+    padding: 5px; /* Adjust padding for small screens */
   }
-  
-  .card-title {
-    font-size: 15px;
-    font-weight: bold;
+
+  .profile-card-title {
+    font-size: 14px; /* Adjust font size on small screens */
   }
-  
-  .card-text {
-    color: gray;
-    font-size: 12px;
+
+  .profile-card-text {
+    font-size: 12px; /* Adjust font size on small screens */
   }
-  
-  
+
+  .profile-pic {
+    max-width: 35px; /* Adjust picture size on small screens */
+  }
+}

@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Define the Subscription schema and model
 const subscriptionSchema = new mongoose.Schema({
     name: String,
-    email: String,
+    email: { type: String, unique: true }, // Ensure email uniqueness
 });
 
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
@@ -55,6 +55,12 @@ app.post('/subscribe', async (req, res) => {
     const { name, email } = req.body;
 
     try {
+        // Check if the user is already subscribed
+        const existingSubscription = await Subscription.findOne({ email });
+        if (existingSubscription) {
+            return res.status(400).json({ message: 'Email is already subscribed.' });
+        }
+
         // Save subscription details to MongoDB
         const newSubscription = new Subscription({ name, email });
         await newSubscription.save();
@@ -82,51 +88,79 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// Route to create a Stripe checkout session
+// Route to handle unsubscription requests
+app.post('/unsubscribe', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Find and delete the subscription from MongoDB
+        const deletedSubscription = await Subscription.findOneAndDelete({ email });
+
+        if (!deletedSubscription) {
+            return res.status(404).json({ message: 'Email not found. Unsubscription failed.' });
+        }
+
+        // Send confirmation email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'You have unsubscribed',
+            text: 'You have successfully unsubscribed from our updates.',
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Email sending error:', error);
+                return res.status(500).json({ message: 'Unsubscription succeeded, but email failed to send.' });
+            } else {
+                console.log('Email sent:', info.response);
+                return res.status(200).json({ message: 'Unsubscription successful! Confirmation email sent.' });
+            }
+        });
+    } catch (error) {
+        console.error('Unsubscription error:', error);
+        return res.status(500).json({ message: 'Unsubscription failed.' });
+    }
+});
+
+// Route to create a checkout session with Stripe
 app.post('/create-checkout-session', async (req, res) => {
     const { amount } = req.body;
 
     try {
-        // Create a new Stripe Checkout session
+        // Ensure BASE_URL is defined
+        const baseUrl = process.env.BASE_URL;
+        if (!baseUrl) {
+            throw new Error('BASE_URL is not defined in environment variables.');
+        }
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: [{
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: 'Sample Product', // Update this with your actual product name
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Book Purchase',
+                        },
+                        unit_amount: amount,
                     },
-                    unit_amount: amount, // Amount in cents
+                    quantity: 1,
                 },
-                quantity: 1,
-            }],
+            ],
             mode: 'payment',
-            success_url: 'http://localhost:5173/', // Update with your success URL
-            cancel_url: 'http://localhost:5173/',   // Update with your cancel URL
+            success_url: `${baseUrl}/`,
+            cancel_url: `${baseUrl}/`,
         });
 
-        // Return the session ID and URL to the client
-        res.json({ id: session.id, url: session.url });
+        res.json({ url: session.url });
     } catch (error) {
         console.error('Stripe checkout session error:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ message: 'Failed to create checkout session.' });
     }
 });
 
-// Start the Express server with dynamic port selection
-const server = app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
-
-// Handle potential 'EADDRINUSE' error and select another port
-server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        console.error(`Port ${port} is already in use. Please use a different port.`);
-        server.listen(0, () => {
-            const newPort = server.address().port;
-            console.log(`Server is running on a new port http://localhost:${newPort}`);
-        });
-    } else {
-        console.error('Server error:', err);
-    }
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });

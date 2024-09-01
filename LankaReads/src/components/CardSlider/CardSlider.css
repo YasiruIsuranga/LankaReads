@@ -1,12 +1,12 @@
 /* Carousel item styling */
-.carousel-item {
+.card-slider-item {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 /* Card slider container */
-.card-slider-container {
+.custom-card-slider-container {
   position: relative;
   width: 100%;
   padding: 0;
@@ -14,15 +14,15 @@
 }
 
 /* Carousel item padding */
-.card-slider-container .carousel-item {
-  padding: 10px; /* Reduced padding to fit the content better */
+.custom-card-slider-container .card-slider-item {
+  padding: 10px;
 }
 
 /* Book card styling */
-.book-card {
-  width: 200px; /* Fixed width for all cards */
-  height: auto; /* Adjust height automatically based on content */
-  margin: 10px; /* Space between cards */
+.custom-book-card {
+  width: 200px;
+  height: auto;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   border: 1px solid #ddd;
@@ -33,147 +33,175 @@
   transition: transform 0.3s ease;
 }
 
-.book-card:hover {
-  transform: scale(1.03); /* Slightly scaled up on hover */
+.custom-book-card:hover {
+  transform: scale(1.05);
 }
 
 /* Card image styling */
-.card-image {
-  width: 100%; /* Ensure the image takes full width of the card */
-  height: 130px; /* Set a fixed height for images */
-  object-fit: cover; /* Cover the card area */
+.custom-card-image {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
 }
 
 /* Card body styling */
-.card-body {
+.custom-card-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 8px; /* Reduced padding inside card body */
+  justify-content: space-between;
+  padding: 8px;
+  height: 150px;
 }
 
 /* Card title row styling */
-.card-title-row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8px; /* Reduced margin below title */
+.custom-card-title-row {
+  margin-bottom: 4px;
 }
 
 /* Card title styling */
-.card-title {
+.custom-card-title {
   margin: 0;
-  font-size: 14px; /* Reduced font size */
-  white-space: nowrap; /* Ensure title stays in one line */
-  overflow: hidden; /* Hide overflow text */
-  text-overflow: ellipsis; /* Show ellipsis if text is too long */
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Card details row styling */
-.card-details-row {
+.custom-card-details-row {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
 /* Card price styling */
-.card-price {
-  margin: 0;
-  font-size: 12px; /* Reduced font size */
+.custom-card-price {
+  margin: 4px 0;
+  font-size: 12px;
 }
 
-/* Button styling */
-.btn-visit {
-  font-size: 12px; /* Reduced font size */
-  padding: 6px 12px; /* Adjusted padding for smaller buttons */
-  margin: 0;
-  border: none; /* Remove border */
-  background-color: #f42d00; /* Button background color */
-  color: white; /* Button text color */
-  border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.3s ease; /* Transition effect */
+/* Button group styling */
+.custom-button-group {
+  display: flex;
+  justify-content: space-between;
 }
 
-.btn-visit:hover {
-  background-color: #e62b00; /* Darker background color on hover */
+/* Visit button styling */
+.custom-btn-visit {
+  font-size: 12px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #f79c42;
+  color: white;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0;
+}
+
+.custom-btn-visit:hover {
+  background-color: #f47216;
+  transform: translateY(-2px);
+}
+
+/* Add to Cart button styling */
+.custom-btn-add-to-cart {
+  font-size: 12px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #42a5f5;
+  color: white;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0;
+}
+
+.custom-btn-add-to-cart:hover {
+  background-color: #1e88e5;
+  transform: translateY(-2px);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .card-slider-container .carousel-item {
-    padding: 8px; /* Further reduced padding */
+  .custom-card-slider-container .card-slider-item {
+    padding: 8px;
   }
 
-  .book-card {
-    width: 180px; /* Adjusted width for medium screens */
+  .custom-book-card {
+    width: 180px;
   }
 
-  .card-image {
-    height: 110px; /* Adjust image height for medium screens */
+  .custom-card-image {
+    height: 110px;
   }
 
-  .card-title {
-    font-size: 13px; /* Slightly smaller font size for medium screens */
+  .custom-card-title {
+    font-size: 13px;
   }
 
-  .card-price {
-    font-size: 11px; /* Slightly smaller font size for medium screens */
+  .custom-card-price {
+    font-size: 11px;
   }
 
-  .btn-visit {
-    font-size: 11px; /* Slightly smaller font size for medium screens */
-    padding: 5px 10px; /* Adjusted padding for medium screens */
+  .custom-btn-visit, .custom-btn-add-to-cart {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 }
 
 @media (max-width: 576px) {
-  .book-card {
-    width: 100%; /* Full width for smaller screens */
+  .custom-book-card {
+    width: 100%;
   }
 
-  .card-image {
-    height: 90px; /* Adjust image height for small screens */
+  .custom-card-image {
+    height: 90px;
   }
 
-  .card-title {
-    font-size: 12px; /* Further reduced font size for small screens */
+  .custom-card-title {
+    font-size: 12px;
   }
 
-  .card-price {
-    font-size: 10px; /* Further reduced font size for small screens */
+  .custom-card-price {
+    font-size: 10px;
   }
 
-  .btn-visit {
-    font-size: 10px; /* Further reduced font size */
-    padding: 4px 8px; /* Further adjusted padding */
+  .custom-btn-visit, .custom-btn-add-to-cart {
+    font-size: 10px;
+    padding: 4px 8px;
   }
 }
 
 /* Dark mode styles */
-body.dark-mode .book-card {
-  background-color: #2b2b2b; /* Dark background for cards */
-  color: #ffffff; /* Light text color */
-  border: 1px solid #444; /* Darker border for dark mode */
+body.dark-mode .custom-book-card {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #444;
 }
 
-body.dark-mode .card-title {
-  color: #ffffff; /* Light color for title in dark mode */
+body.dark-mode .custom-card-title {
+  color: #ffffff;
 }
 
-body.dark-mode .card-price {
-  color: #d1d1d1; /* Lighter color for price in dark mode */
+body.dark-mode .custom-card-price {
+  color: #d1d1d1;
 }
 
-body.dark-mode .btn-visit {
-  background-color: #e62b00; /* Darker button background color for dark mode */
-  border-color: #e62b00; /* Darker button border color for dark mode */
-  color: white; /* Button text color */
+body.dark-mode .custom-btn-visit {
+  background-color: #e68600;
 }
 
-body.dark-mode .btn-visit:hover {
-  background-color: #c54c00; /* Even darker background color on hover */
-  border-color: #c54c00; /* Even darker border color on hover */
+body.dark-mode .custom-btn-visit:hover {
+  background-color: #c76a00;
 }
 
-body.dark-mode .card-image {
-  border-bottom: 1px solid #f42d00; /* Border below the image in dark mode */
+body.dark-mode .custom-btn-add-to-cart {
+  background-color: #1976d2;
+}
+
+body.dark-mode .custom-btn-add-to-cart:hover {
+  background-color: #0d47a1;
+}
+
+body.dark-mode .custom-card-image {
+  border-bottom: 1px solid #f79c42;
 }

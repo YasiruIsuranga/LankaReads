@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchBar.css';
 
 const SearchBar = () => {
+  const [placeholder, setPlaceholder] = useState('Search Books Here');
+
+  const handleSelect = (option) => {
+    if (option === 'name') {
+      setPlaceholder('Search by Book Name');
+    } else if (option === 'category') {
+      setPlaceholder('Search by Category');
+    }
+  };
+
   return (
     <div className="input-group mb-3 search-bar">
       <div className="input-group-prepend">
@@ -16,18 +26,15 @@ const SearchBar = () => {
           Category
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdown">
-          <li><a className="dropdown-item" href="#">Action</a></li>
-          <li><a className="dropdown-item" href="#">Another action</a></li>
-          <li><a className="dropdown-item" href="#">Something else here</a></li>
-          <li><div role="separator" className="dropdown-divider"></div></li>
-          <li><a className="dropdown-item" href="#">Separated link</a></li>
+          <li><a className="dropdown-item" href="#" onClick={() => handleSelect('name')}>Search by Name</a></li>
+          <li><a className="dropdown-item" href="#" onClick={() => handleSelect('category')}>Search by Category</a></li>
         </ul>
       </div>
       <input
         type="text"
         className="form-control search-input"
-        placeholder="Search Books Here"
-        aria-label="Search Books Here"
+        placeholder={placeholder}
+        aria-label={placeholder}
         aria-describedby="button-addon2"
       />
       <div className="input-group-append">

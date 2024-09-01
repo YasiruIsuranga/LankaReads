@@ -1,6 +1,17 @@
+/* Header styling */
+.header {
+    background-color: white; /* Default background color */
+    transition: background-color 0.3s ease;
+}
+
+/* Dark mode for header */
+body.dark-mode .header {
+    background-color: black; /* Dark mode background color */
+}
+
 /* Logo styling */
 .logo1 {
-    width: 140px; /* Adjusted size */
+    width: 140px;
     height: auto;
     margin: 0;
     margin-top: 0;
@@ -8,9 +19,9 @@
 
 /* Navbar links */
 .navbar-nav .nav-link {
-    padding-left: 10px; /* Reduced padding */
-    padding-right: 10px; /* Reduced padding */
-    font-size: 14px; /* Smaller font size */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -20,17 +31,17 @@
 
 /* Column text links */
 .col .text-dark {
-    padding-left: 8px; /* Reduced padding */
-    padding-right: 8px; /* Reduced padding */
-    font-size: 14px; /* Smaller font size */
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 14px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .col .text-dark:hover {
     color: #f42d00;
     background-color: #f8f9fa;
-    transform: scale(1.05); /* Slightly reduced scale */
-    border-radius: 50%; /* Adjusted border radius */
+    transform: scale(1.05);
+    border-radius: 50%;
 }
 
 /* Get in touch button */
@@ -38,9 +49,9 @@
     background-color: #f42d00;
     border-color: #f42d00;
     color: white;
-    border-radius: 12px; /* Reduced border radius */
-    padding: 6px 12px; /* Reduced padding */
-    font-size: 14px; /* Smaller font size */
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 14px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -48,19 +59,19 @@
     background-color: #f8f9fa;
     color: #f42d00;
     border: 2px solid #f42d00;
-    transform: scale(1.05); /* Slightly reduced scale */
+    transform: scale(1.05);
 }
 
 /* Mobile menu styling */
 .mobile-menu {
     background-color: white;
-    padding: 0.5rem; /* Reduced padding */
+    padding: 0.5rem;
     position: absolute;
     top: 100%;
     left: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: auto;
-    min-width: 180px; /* Reduced min-width */
+    min-width: 180px;
     display: none;
 }
 
@@ -71,23 +82,23 @@
 }
 
 .mobile-menu ul li {
-    margin-bottom: 0.75rem; /* Reduced margin */
+    margin-bottom: 0.75rem;
 }
 
 .mobile-menu ul li a {
     color: black;
     text-decoration: none;
     display: block;
-    padding: 0.5rem 0.75rem; /* Reduced padding */
+    padding: 0.5rem 0.75rem;
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
-    font-size: 14px; /* Smaller font size */
+    font-size: 14px;
 }
 
 .mobile-menu ul li a:hover {
     color: #f42d00;
     background-color: #f8f9fa;
-    transform: scale(1.03); /* Slightly reduced scale */
-    border-radius: 8px; /* Adjusted border radius */
+    transform: scale(1.03);
+    border-radius: 8px;
 }
 
 /* Show mobile menu button and menu on small screens */
@@ -108,6 +119,24 @@
     }
 }
 
+/* Dark mode for mobile menu */
+body.dark-mode .mobile-menu {
+    background-color: #1e1e1e; /* Dark mode background color */
+    color: white;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .mobile-menu ul li a {
+    color: #ffffff;
+}
+
+body.dark-mode .mobile-menu ul li a:hover {
+    color: #f42d00;
+    background-color: #424242;
+    transform: scale(1.03);
+    border-radius: 8px;
+}
+
 /* Custom offcanvas styling for mobile menu */
 .custom-offcanvas {
     height: 50%;
@@ -121,18 +150,18 @@
 .btn11 {
     background-color: #f42d00;
     color: white;
-    padding: 6px 12px; /* Reduced padding */
-    border-radius: 16px; /* Reduced border radius */
-    font-size: 14px; /* Smaller font size */
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn11:hover {
     background-color: #f8f9fa;
     color: #f42d00;
-    transform: scale(1.03); /* Slightly reduced scale */
+    transform: scale(1.03);
     border: 1px solid #f42d00;
-    border-radius: 16px; /* Reduced border radius */
+    border-radius: 16px;
 }
 
 /* Dark mode styles */
@@ -154,7 +183,7 @@ body.dark-mode .navbar-nav .nav-link:hover {
     color: #f42d00;
     background-color: #2c2c2c;
     text-decoration: underline;
-    transform: scale(1.05); /* Slightly reduced scale */
+    transform: scale(1.05);
 }
 
 body.dark-mode .col .text-dark {
@@ -164,8 +193,8 @@ body.dark-mode .col .text-dark {
 body.dark-mode .col .text-dark:hover {
     color: #f42d00;
     background-color: #2c2c2c;
-    transform: scale(1.05); /* Slightly reduced scale */
-    border-radius: 50%; /* Adjusted border radius */
+    transform: scale(1.05);
+    border-radius: 50%;
 }
 
 body.dark-mode .btngetintouch {
@@ -178,24 +207,7 @@ body.dark-mode .btngetintouch:hover {
     background-color: #2c2c2c;
     color: #f42d00;
     border: 2px solid #f42d00;
-    transform: scale(1.05); /* Slightly reduced scale */
-}
-
-body.dark-mode .mobile-menu {
-    background-color: #2c2c2c;
-    color: white;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .mobile-menu ul li a {
-    color: #ffffff;
-}
-
-body.dark-mode .mobile-menu ul li a:hover {
-    color: #f42d00;
-    background-color: #424242;
-    transform: scale(1.03); /* Slightly reduced scale */
-    border-radius: 8px; /* Adjusted border radius */
+    transform: scale(1.05);
 }
 
 body.dark-mode .btn11 {
@@ -206,9 +218,9 @@ body.dark-mode .btn11 {
 body.dark-mode .btn11:hover {
     background-color: #2c2c2c;
     color: #f42d00;
-    transform: scale(1.03); /* Slightly reduced scale */
+    transform: scale(1.03);
     border: 1px solid #f42d00;
-    border-radius: 16px; /* Reduced border radius */
+    border-radius: 16px;
 }
 
 /* Dark Mode Styles for Logo and Icons */
@@ -217,15 +229,11 @@ body.dark-mode .logo1 img {
 }
 
 body.dark-mode .text-dark {
-    color: #ffffff !important; /* Converts the "Add to Cart" and "Wish List" icons to white */
+    color: #ffffff !important;
 }
 
 body.dark-mode .navbar-toggler .fa-bars {
     color: #ffffff; /* Converts the hamburger menu icon to white */
-}
-
-body.dark-mode .btn11 {
-    color: #ffffff; /* Ensures button text color is white */
 }
 
 body.dark-mode .bg-white {

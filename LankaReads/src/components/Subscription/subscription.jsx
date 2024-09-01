@@ -24,13 +24,31 @@ function Subscription() {
         if (response.ok) {
             setIsSubscribed(true);
             setPopupMessage('You have successfully subscribed!');
-            alert('You have successfully subscribed!');
-
-            // Optionally clear form fields
-            setName('');
-            setEmail('');
         } else {
             alert('Subscription failed. Please try again.');
+        }
+    };
+
+    const handleUnsubscribe = async (e) => {
+        e.preventDefault();
+
+        const response = await fetch('http://localhost:5000/unsubscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            setIsSubscribed(false);
+            setPopupMessage('You have successfully unsubscribed!');
+            setName(''); // Clear the name field
+            setEmail(''); // Clear the email field
+        } else {
+            alert('Unsubscription failed. Please try again.');
         }
     };
 
@@ -44,7 +62,7 @@ function Subscription() {
                 </div>
                 <div className="row justify-content-center align-items-center">
                     <div className="col-lg-6">
-                        <form className="d-flex flex-column flex-md-row justify-content-center align-items-center" onSubmit={handleSubscribe}>
+                        <form className="d-flex flex-column flex-md-row justify-content-center align-items-center">
                             <input
                                 type="text"
                                 className="form-control mb-2 mb-md-0 me-md-2"
@@ -52,6 +70,7 @@ function Subscription() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
+                                disabled={isSubscribed}
                             />
                             <input
                                 type="email"
@@ -60,9 +79,14 @@ function Subscription() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
+                                disabled={isSubscribed}
                             />
-                            <button type="submit" className="btn btnsubscribe" disabled={isSubscribed}>
-                                {isSubscribed ? 'SUBSCRIBED' : 'SUBSCRIBE'}
+                            <button
+                                type="button"
+                                className="btn btnsubscribe"
+                                onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}
+                            >
+                                {isSubscribed ? 'UNSUBSCRIBE' : 'SUBSCRIBE'}
                             </button>
                         </form>
                         {popupMessage && <div className="alert alert-success mt-3">{popupMessage}</div>}
