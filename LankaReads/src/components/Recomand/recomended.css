@@ -76,29 +76,30 @@
 
 /* Common button styles */
 .recommend-btn-visit {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    margin-bottom: 10px;
-}
 
+    padding: 10px !important;
+    border: none;
+    background-color: #f79c42 !important;
+    color: white;
+    border-radius: 10px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0;
+    
+  }
 .recommend-btn-visit:hover {
     background-color: #0056b3;
 }
 
 .recommend-add-to-cart-btn {
-    background-color: #f42d00;
+    
+    padding: 10px !important;
     border: none;
+    background-color: #42a5f5 !important;
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
+    border-radius: 10px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0;
+  }
 
 .recommend-add-to-cart-btn:hover {
     background-color: #e62b00;

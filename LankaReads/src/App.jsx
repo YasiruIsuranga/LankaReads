@@ -7,9 +7,9 @@ import Authors from './pages/Authors/Authors';
 import Blogs from './pages/Blogs/Blogs';
 import Register from './pages/Register/Register';
 import Payment from './pages/Payment/Payment';
-import OpenPage from './pages/OpenPage/OpenPage'; // Ensure this import is correct
+import OpenPage from './pages/OpenPage/OpenPage';
 import { CartProvider } from './contexts/CartContext';
-import { ThemeProvider } from './contexts/ThemeContext'; // Import the ThemeProvider
+import { ThemeProvider } from './contexts/ThemeContext';
 import './App.css';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/authors" element={<Authors />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/openpage/:bookId" element={<OpenPage />} /> {/* Ensure this path is correct */}
+            <Route path="/openpage/:bookId" element={<OpenPage />} />
             <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>

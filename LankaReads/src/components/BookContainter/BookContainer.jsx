@@ -37,7 +37,7 @@ function BookContainer({ books }) {
                                             <div className='d-flex flex-column justify-content-between align-items-center mt-3'>
                                                 <b><p className="card-text mb-0">${book.price.toFixed(2)}</p></b>
                                                 <div className="button-group d-flex mt-2">
-                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary btn-visit me-2">
+                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary visit-btn me-2">
                                                         Visit
                                                     </Link>
                                                     <button 
@@ -81,7 +81,7 @@ function BookContainer({ books }) {
                                             <div className='d-flex flex-column justify-content-between align-items-center mt-3'>
                                                 <b><p className="card-text mb-0">${book.price.toFixed(2)}</p></b>
                                                 <div className="button-group d-flex mt-2">
-                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary btn-visit me-2">
+                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary visit-btn me-2">
                                                         Visit
                                                     </Link>
                                                     <button 
@@ -125,7 +125,7 @@ function BookContainer({ books }) {
                                             <div className='d-flex flex-column justify-content-between align-items-center mt-3'>
                                                 <b><p className="card-text mb-0">${book.price.toFixed(2)}</p></b>
                                                 <div className="button-group d-flex mt-2">
-                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary btn-visit me-2">
+                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary visit-btn me-2">
                                                         Visit
                                                     </Link>
                                                     <button 
@@ -169,7 +169,7 @@ function BookContainer({ books }) {
                                             <div className='d-flex flex-column justify-content-between align-items-center mt-3'>
                                                 <b><p className="card-text mb-0">${book.price.toFixed(2)}</p></b>
                                                 <div className="button-group d-flex mt-2">
-                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary btn-visit me-2">
+                                                    <Link to={`/OpenPage/${book._id}`} className="btn btn-secondary visit-btn me-2">
                                                         Visit
                                                     </Link>
                                                     <button 

@@ -7,14 +7,27 @@
 }
 
 .add-btn {
-    max-width: 100px;
-    font-size: 13px;
-    background-color: #f42d00; /* Primary button color */
-    border-color: #f42d00; /* Border color */
-    color: white;
-    border-radius: 15%;
-}
 
+    padding: 10px !important;
+    border: none;
+    background-color: #0056b3 !important;
+    color: white;
+    border-radius: 10px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0;
+  }
+
+  .visit-btn {
+
+    font-size: 15px;
+    padding: 10px !important;
+    border: none;
+    background-color: #f79c42 !important;
+    color: white;
+    border-radius: 10px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0;
+  }
 .add-btn:hover {
     border: 2px solid #f42d00; /* Border color on hover */
     background-color: white; /* Button background color on hover */

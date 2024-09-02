@@ -19,7 +19,7 @@ function Header() {
     } else {
       document.body.classList.remove('dark-mode');
     }
-  }, []);
+  }, [isDarkMode]);
 
   return (
     <>
@@ -52,7 +52,6 @@ function Header() {
               </nav>
             </div>
             <div className="col-auto d-flex align-items-center">
-              <Wishlist />
               <AddCart />
               <button className="btn btn-light mx-2 mx-lg-3 py-2" onClick={toggleDarkMode}>
                 {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}

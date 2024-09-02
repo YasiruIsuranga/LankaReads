@@ -41,12 +41,17 @@ function AddCart({ isDarkMode }) {
         <div className="offcanvas-body d-flex flex-column">
           {cart.length > 0 ? (
             cart.map((book, index) => (
-              <div key={index} className="cart-item d-flex justify-content-between mb-2">
-                <div>
-                  <span>{book.name} (x{book.quantity || 1})</span>
-                  <span className="text-muted"> - ${book.price.toFixed(2)}</span>
+              <div key={index} className={`cart-item d-flex justify-content-between align-items-center mb-3 p-2 shadow-sm ${isDarkMode ? 'dark-mode' : ''}`}>
+                <img src={book.image} alt={book.name} className="cart-item-image me-3" />
+                <div className="cart-item-details">
+                  <span>{book.name}</span>
+                  <div className={`text-muted price-quantity`}>
+                    ${book.price.toFixed(2)} x(1) {book.quantity}
+                  </div>
                 </div>
-                <button className="btn btn-sm btn-danger" onClick={() => removeFromCart(index)}>Remove</button>
+                <div className="d-flex align-items-center">
+                  <button className="btn btn-sm btn-danger ms-2" onClick={() => removeFromCart(index)}>Remove</button>
+                </div>
               </div>
             ))
           ) : (
@@ -54,10 +59,10 @@ function AddCart({ isDarkMode }) {
           )}
           {cart.length > 0 && (
             <>
-              <div className={`mt-3 total-price ${isDarkMode ? 'dark-mode' : ''}`}>
-                <strong>Total Price: ${getTotalPrice().toFixed(2)}</strong>
+              <div>
+                <strong className={`total-price`}>Total Price: ${getTotalPrice().toFixed(2)}</strong>
               </div>
-              <button className={`btn btn11 mt-auto ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleCheckout}>Checkout</button>
+              <button className={`btn btn11 mt-auto`} onClick={handleCheckout}>Checkout</button>
             </>
           )}
         </div>

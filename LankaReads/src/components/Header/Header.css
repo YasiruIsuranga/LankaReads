@@ -239,3 +239,49 @@ body.dark-mode .navbar-toggler .fa-bars {
 body.dark-mode .bg-white {
     background-color: #1e1e1e !important;
 }
+/* Dark mode for mobile menu */
+body.dark-mode .offcanvas {
+    background-color: #1e1e1e; /* Dark mode background color */
+    color: white;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode links in mobile menu */
+body.dark-mode .offcanvas .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+body.dark-mode .offcanvas .navbar-nav .nav-link:hover {
+    color: #f42d00;
+    background-color: #424242;
+    transform: scale(1.03);
+    border-radius: 8px;
+}
+
+/* Adjustments for offcanvas component to ensure responsiveness and dark mode */
+.offcanvas {
+    background-color: white;
+    transition: background-color 0.3s ease;
+    /* Other offcanvas styles */
+}
+
+/* Apply dark mode styles */
+body.dark-mode .offcanvas {
+    background-color: #1e1e1e;
+}
+
+/* Responsive styling for the offcanvas menu */
+@media (max-width: 991px) {
+    .offcanvas {
+        width: 250px; /* Adjust as needed */
+    }
+
+    .offcanvas-header,
+    .offcanvas-body {
+        padding: 1rem;
+    }
+
+    .offcanvas-body {
+        padding-bottom: 0;
+    }
+}
