@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 const Stripe = require('stripe');
 const bodyParser = require('body-parser');
 
-// Load environment variables
+// Load environment variables from .env file
 dotenv.config();
 
 // Initialize Express app
@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, )
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('MongoDB connection error:', err.message));
 
@@ -28,6 +28,19 @@ const subscriptionSchema = new mongoose.Schema({
 });
 
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
+
+// Define the Delivery schema and model
+const deliverySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
+    address: { type: String, required: true },
+    cartItems: [{ bookName: String, bookPrice: String }], // Array of cart items
+    totalPrice: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
+});
+
+const Delivery = mongoose.model('Delivery', deliverySchema);
 
 // Nodemailer transporter configuration
 const transporter = nodemailer.createTransport({
@@ -73,18 +86,11 @@ app.post('/subscribe', async (req, res) => {
             text: `Dear ${name},\n\nThank you for subscribing to our updates! We will keep you informed.`,
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Email sending error:', error);
-                return res.status(500).json({ message: 'Subscription succeeded, but email failed to send.' });
-            } else {
-                console.log('Email sent:', info.response);
-                return res.status(200).json({ message: 'Subscription successful! Confirmation email sent.' });
-            }
-        });
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Subscription successful! Confirmation email sent.' });
     } catch (error) {
         console.error('Subscription error:', error);
-        return res.status(500).json({ message: 'Subscription failed.' });
+        res.status(500).json({ message: 'Subscription failed.' });
     }
 });
 
@@ -108,27 +114,69 @@ app.post('/unsubscribe', async (req, res) => {
             text: 'You have successfully unsubscribed from our updates.',
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Email sending error:', error);
-                return res.status(500).json({ message: 'Unsubscription succeeded, but email failed to send.' });
-            } else {
-                console.log('Email sent:', info.response);
-                return res.status(200).json({ message: 'Unsubscription successful! Confirmation email sent.' });
-            }
-        });
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Unsubscription successful! Confirmation email sent.' });
     } catch (error) {
         console.error('Unsubscription error:', error);
-        return res.status(500).json({ message: 'Unsubscription failed.' });
+        res.status(500).json({ message: 'Unsubscription failed.' });
     }
 });
 
-// Route to create a checkout session with Stripe
-app.post('/create-checkout-session', async (req, res) => {
-    const { amount } = req.body;
+
+// Route to handle multiple delivery details submissions
+app.post('/api/delivery', async (req, res) => {
+    const { name, email, phone, address, cartItems, totalPrice } = req.body;
 
     try {
-        // Ensure BASE_URL is defined
+        // Save delivery details to MongoDB
+        const newDelivery = new Delivery({ name, email, phone, address, cartItems, totalPrice });
+        await newDelivery.save();
+
+        // Send confirmation email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Delivery Confirmation',
+            text: `Dear ${name},\n\nYour delivery order has been received. Details:\n\n${cartItems.map(item => `Book: ${item.name}\nPrice: $${item.price.toFixed(2)}\n`).join('')}\nTotal Price: $${totalPrice.toFixed(2)}\nAddress: ${address}\n\nThank you for your order!`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Delivery details submitted successfully!' });
+    } catch (error) {
+        console.error('Error submitting delivery details:', error);
+        res.status(500).json({ message: 'Failed to submit delivery details.' });
+    }
+});
+
+// Route to handle single delivery details submissions
+app.post('/api/single/delivery', async (req, res) => {
+    const { name, email, phone, address, bookName, bookPrice } = req.body;
+
+    try {
+        // Save delivery details to MongoDB
+        const newDelivery = new Delivery({ name, email, phone, address, cartItems: [{ bookName, bookPrice }], totalPrice: bookPrice });
+        await newDelivery.save();
+
+        // Send confirmation email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Delivery Confirmation',
+            text: `Dear ${name},\n\nYour delivery order has been received. Details:\n\nBook: ${bookName}\nPrice: ${bookPrice}\nAddress: ${address}\n\nThank you for your order!`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Delivery details submitted successfully!' });
+    } catch (error) {
+        console.error('Error submitting delivery details:', error);
+        res.status(500).json({ message: 'Failed to submit delivery details.' });
+    }
+});
+
+app.post('/create-checkout-session', async (req, res) => {
+    const { amount, name, image, price, bookId } = req.body;
+
+    try {
         const baseUrl = process.env.BASE_URL;
         if (!baseUrl) {
             throw new Error('BASE_URL is not defined in environment variables.');
@@ -141,7 +189,8 @@ app.post('/create-checkout-session', async (req, res) => {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Book Purchase',
+                            name: name,  // Display book name
+                            images: [image],  // Display book image
                         },
                         unit_amount: amount,
                     },
@@ -149,7 +198,7 @@ app.post('/create-checkout-session', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${baseUrl}/`,
+            success_url: `${baseUrl}bookdoc?bookId=${bookId}&name=${encodeURIComponent(name)}&price=${price}&image=${encodeURIComponent(image)}`,
             cancel_url: `${baseUrl}/`,
         });
 
@@ -157,6 +206,43 @@ app.post('/create-checkout-session', async (req, res) => {
     } catch (error) {
         console.error('Stripe checkout session error:', error);
         res.status(500).json({ message: 'Failed to create checkout session.' });
+    }
+});
+
+// Backend: Modify /create-cart-checkout-session route
+app.post('/create-cart-checkout-session', async (req, res) => {
+    const { cart, totalPrice } = req.body;
+
+    try {
+        const baseUrl = process.env.BASE_URL;
+        if (!baseUrl) {
+            throw new Error('BASE_URL is not defined in environment variables.');
+        }
+
+        const lineItems = cart.map((book) => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: book.name,
+                    images: [book.image],
+                },
+                unit_amount: Math.round(book.price * 100), // Convert to cents
+            },
+            quantity: book.quantity || 1, // Default to 1 if no quantity provided
+        }));
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: lineItems,
+            mode: 'payment',
+            success_url: `${baseUrl}multiplebookdoc?cart=${encodeURIComponent(JSON.stringify(cart))}&totalPrice=${totalPrice}`,
+            cancel_url: `${baseUrl}/cancel`,
+        });
+
+        res.json({ url: session.url });
+    } catch (error) {
+        console.error('Stripe cart checkout session error:', error);
+        res.status(500).json({ message: 'Failed to create cart checkout session.' });
     }
 });
 

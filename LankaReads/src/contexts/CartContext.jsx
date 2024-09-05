@@ -19,11 +19,11 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
 
   const addToCart = (book) => {
-    setCart(prevCart => [...prevCart, book]);
+    setCart((prevCart) => [...prevCart, book]);
   };
 
   const removeFromCart = (index) => {
-    setCart(prevCart => prevCart.filter((_, i) => i !== index));
+    setCart((prevCart) => prevCart.filter((_, i) => i !== index));
   };
 
   const getCartCount = () => {

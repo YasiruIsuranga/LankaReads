@@ -6,7 +6,10 @@ const Book = require('./models/Book'); // Adjust the path if needed
 dotenv.config();
 
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_URI, )
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 .then(() => console.log('Connected to MongoDB'))
 .catch((err) => console.error('MongoDB connection error:', err.message));
 
@@ -30,21 +33,21 @@ const books = [
         name: '1984',
         image: 'https://via.placeholder.com/150x230.png?text=1984',
         price: 12.99,
-        category: 'Historic',
+        category: 'Dystopian',
         description: 'A novel by George Orwell published in 1949.',
     },
     {
         name: 'Moby Dick',
         image: 'https://via.placeholder.com/150x230.png?text=Moby+Dick',
         price: 9.99,
-        category: 'Novel',
+        category: 'Adventure',
         description: 'A novel by Herman Melville published in 1851.',
     },
     {
         name: 'War and Peace',
         image: 'https://via.placeholder.com/150x230.png?text=War+and+Peace',
         price: 14.99,
-        category: 'Fiction',
+        category: 'Historic',
         description: 'A novel by Leo Tolstoy published from 1865 to 1869.',
     },
     // New books with category "Fiction"
@@ -59,35 +62,35 @@ const books = [
         name: 'Brave New World',
         image: 'https://via.placeholder.com/150x230.png?text=Brave+New+World',
         price: 10.49,
-        category: 'Fiction',
+        category: 'Science Fiction',
         description: 'A novel by Aldous Huxley published in 1932.',
     },
     {
         name: 'The Road',
         image: 'https://via.placeholder.com/150x230.png?text=The+Road',
         price: 13.49,
-        category: 'Fiction',
+        category: 'Post-Apocalyptic',
         description: 'A novel by Cormac McCarthy published in 2006.',
     },
     {
         name: 'Life of Pi',
         image: 'https://via.placeholder.com/150x230.png?text=Life+of+Pi',
         price: 12.99,
-        category: 'Fiction',
+        category: 'Adventure',
         description: 'A novel by Yann Martel published in 2001.',
     },
     {
         name: 'The Hobbit',
         image: 'https://via.placeholder.com/150x230.png?text=The+Hobbit',
         price: 9.99,
-        category: 'Fiction',
+        category: 'Fantasy',
         description: 'A novel by J.R.R. Tolkien published in 1937.',
     },
     {
         name: 'Dune',
         image: 'https://via.placeholder.com/150x230.png?text=Dune',
         price: 14.49,
-        category: 'Fiction',
+        category: 'Science Fiction',
         description: 'A science fiction novel by Frank Herbert published in 1965.',
     },
 ];

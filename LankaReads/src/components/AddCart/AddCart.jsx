@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './AddCart.css';
 
 function AddCart({ isDarkMode }) {
   const { cart, removeFromCart, getCartCount, getTotalPrice } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const handleCheckout = async () => {
-    try {
-      const amount = getTotalPrice() * 100; // Convert to cents for Stripe
-      const response = await axios.post('http://localhost:5000/create-checkout-session', { amount });
-      const sessionUrl = response.data.url;
-      window.location.href = sessionUrl;
-    } catch (error) {
-      console.error('Error during checkout:', error);
-      alert('There was an issue with the checkout. Please try again later.');
-    }
+  const handleViewPayment = () => {
+    // Store cart data and total price in local storage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('totalPrice', getTotalPrice().toFixed(2));
+    // Navigate to OpenPage with cart data
+    navigate(`/OpenCartSelection/${cart[0]?.id}`);
   };
 
   return (
@@ -42,29 +39,22 @@ function AddCart({ isDarkMode }) {
           {cart.length > 0 ? (
             cart.map((book, index) => (
               <div key={index} className={`cart-item d-flex justify-content-between align-items-center mb-3 p-2 shadow-sm ${isDarkMode ? 'dark-mode' : ''}`}>
-                <img src={book.image} alt={book.name} className="cart-item-image me-3" />
-                <div className="cart-item-details">
-                  <span>{book.name}</span>
-                  <div className={`text-muted price-quantity`}>
-                    ${book.price.toFixed(2)} x(1) {book.quantity}
+                <div className="d-flex align-items-center">
+                  <img src={book.image} alt={book.title} className="cart-item-img" />
+                  <div className="ms-2">
+                    <h6 className={`mb-1 ${isDarkMode ? 'text-light' : ''}`}>{book.title}</h6>
+                    <p className={`mb-0 ${isDarkMode ? 'text-light' : ''}`}>${book.price}</p>
                   </div>
                 </div>
-                <div className="d-flex align-items-center">
-                  <button className="btn btn-sm btn-danger ms-2" onClick={() => removeFromCart(index)}>Remove</button>
-                </div>
+                <button className={`btn btn-danger btn-sm ${isDarkMode ? 'dark-mode' : ''}`} onClick={() => removeFromCart(index)}>Remove</button>
               </div>
             ))
           ) : (
-            <p>No products in the cart.</p>
+            <p className={`text-center ${isDarkMode ? 'text-light' : ''}`}>Your cart is empty.</p>
           )}
-          {cart.length > 0 && (
-            <>
-              <div>
-                <strong className={`total-price`}>Total Price: ${getTotalPrice().toFixed(2)}</strong>
-              </div>
-              <button className={`btn btn11 mt-auto`} onClick={handleCheckout}>Checkout</button>
-            </>
-          )}
+          <div className="mt-auto text-center">
+            <button className={`btn btn-secondary ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleViewPayment}>View Payment</button>
+          </div>
         </div>
       </div>
     </>

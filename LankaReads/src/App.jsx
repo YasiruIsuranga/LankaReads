@@ -8,9 +8,14 @@ import Blogs from './pages/Blogs/Blogs';
 import Register from './pages/Register/Register';
 import Payment from './pages/Payment/Payment';
 import OpenPage from './pages/OpenPage/OpenPage';
+import Delivery from './pages/Delivery/Delivery';
 import { CartProvider } from './contexts/CartContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './App.css';
+import OpenCartSelection from './pages/OpenCartSelection/OpenCartSelection';
+import MultipleDelivery from './pages/MultipleDelivery/MultipleDelivery';
+import BookDoc from './pages/BookDoc/BookDoc';
+import MultipleBookDoc from './pages/MultipleBookDoc/MultipleBookDoc';  // New import
 
 function App() {
   return (
@@ -27,7 +32,13 @@ function App() {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/register" element={<Register />} />
             <Route path="/openpage/:bookId" element={<OpenPage />} />
+            <Route path="/opencartselection/:bookId" element={<OpenCartSelection />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/bookdoc" element={<BookDoc />} />
+            <Route path="/multiplebookdoc" element={<MultipleBookDoc />} /> {/* New route */}
+            <Route path="/delivery" element={<Delivery />} />
+            <Route path="/multipledelivery" element={<MultipleDelivery />} />
+            <Route path="*" element={<div>Page Not Found</div>} /> {/* Catch-all route */}
           </Routes>
         </div>
       </CartProvider>

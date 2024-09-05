@@ -4,11 +4,30 @@ const mongoose = require('mongoose');
 
 // Define the Book schema and model
 const bookSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    price: Number,
-    category: String,
-    description: String,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: 0,
+    },
+    category: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true,
+    },
 });
 
 const Book = mongoose.model('Book', bookSchema);
@@ -35,7 +54,7 @@ router.get('/books', async (req, res) => {
         booksCacheTimestamp = Date.now();
         res.json(books);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching books' });
+        res.status(500).json({ message: 'Error fetching books', error: error.message });
     }
 });
 
@@ -53,7 +72,7 @@ router.get('/books/:id', async (req, res) => {
         if (!book) return res.status(404).json({ message: 'Book not found' });
         res.json(book);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching book' });
+        res.status(500).json({ message: 'Error fetching book', error: error.message });
     }
 });
 

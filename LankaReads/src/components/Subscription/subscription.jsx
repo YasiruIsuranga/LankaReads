@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './subscription.css';
 
@@ -7,6 +7,19 @@ function Subscription() {
     const [email, setEmail] = useState('');
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
+
+    useEffect(() => {
+        // Retrieve subscription details from localStorage if available
+        const storedName = localStorage.getItem('name');
+        const storedEmail = localStorage.getItem('email');
+        const subscriptionStatus = localStorage.getItem('isSubscribed') === 'true';
+
+        if (storedName && storedEmail) {
+            setName(storedName);
+            setEmail(storedEmail);
+            setIsSubscribed(subscriptionStatus);
+        }
+    }, []);
 
     const handleSubscribe = async (e) => {
         e.preventDefault();
@@ -19,9 +32,12 @@ function Subscription() {
             body: JSON.stringify({ name, email }),
         });
 
-        const result = await response.json();
-
         if (response.ok) {
+            // Save to localStorage
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('isSubscribed', true);
+
             setIsSubscribed(true);
             setPopupMessage('You have successfully subscribed!');
         } else {
@@ -40,9 +56,12 @@ function Subscription() {
             body: JSON.stringify({ email }),
         });
 
-        const result = await response.json();
-
         if (response.ok) {
+            // Clear from localStorage
+            localStorage.removeItem('name');
+            localStorage.removeItem('email');
+            localStorage.setItem('isSubscribed', false);
+
             setIsSubscribed(false);
             setPopupMessage('You have successfully unsubscribed!');
             setName(''); // Clear the name field
@@ -65,7 +84,7 @@ function Subscription() {
                         <form className="d-flex flex-column flex-md-row justify-content-center align-items-center">
                             <input
                                 type="text"
-                                className="form-control mb-2 mb-md-0 me-md-2"
+                                className="form-control mb-2 mb-md-0 me-md-2 input"
                                 placeholder="Your Name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -74,7 +93,7 @@ function Subscription() {
                             />
                             <input
                                 type="email"
-                                className="form-control mb-2 mb-md-0 me-md-2"
+                                className="form-control mb-2 mb-md-0 me-md-2 input"
                                 placeholder="Your Email Address"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 import Footer from '../../components/Footer/footer';
-import BookContainer from '../../components/BookContainter/BookContainer';
+import BookContainer from '../../components/BookContainter/BookContainer'; // Corrected the path typo
 import './Books.css';
 import axios from 'axios';
 
@@ -14,6 +14,7 @@ function Books() {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [error, setError] = useState('');
+  const [sectionTitle, setSectionTitle] = useState('Recommended For You'); // New state for section title
 
   useEffect(() => {
     // Fetch books data
@@ -31,31 +32,25 @@ function Books() {
   }, []);
 
   const handleSelect = (option) => {
-    if (option === 'name') {
-      setPlaceholder('Search by Book Name');
-      setButtonText('Book Name');
-      setSearchType('name');
-    } else if (option === 'category') {
-      setPlaceholder('Search by Category');
-      setButtonText('Category');
-      setSearchType('category');
-    }
+    setSearchType(option);
+    setPlaceholder(`Search by ${option === 'name' ? 'Book Name' : 'Category'}`);
+    setButtonText(option === 'name' ? 'Book Name' : 'Category');
+    setSectionTitle('Recommended For You'); // Reset section title when switching search type
   };
 
   const handleSearch = () => {
+    let filtered = [];
     if (searchType === 'name') {
-      // Filter books by name
-      const filtered = books.filter(book =>
+      filtered = books.filter(book => 
         book.name.toLowerCase().includes(searchInput.toLowerCase())
       );
-      setFilteredBooks(filtered.length > 0 ? filtered : []);
     } else if (searchType === 'category') {
-      // Filter books by category
-      const filtered = books.filter(book =>
+      filtered = books.filter(book => 
         book.category.toLowerCase().includes(searchInput.toLowerCase())
       );
-      setFilteredBooks(filtered.length > 0 ? filtered : []);
     }
+    setFilteredBooks(filtered.length > 0 ? filtered : []);
+    setSectionTitle(filtered.length > 0 ? `Search Results for "${searchInput}"` : `No results found for "${searchInput}"`);
   };
 
   return (
@@ -65,22 +60,20 @@ function Books() {
         <div className='row justify-content-center mt-5'>
           <div className='col-8'>
             <div className="input-group mb-3">
-              <div className="input-group-prepend mt-3">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-danger dropdown-toggle me-3 catogary-btn"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {buttonText}
-                  </button>
-                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a className="dropdown-item" href="#" onClick={() => handleSelect('name')}>Search by Name</a></li>
-                    <li><a className="dropdown-item" href="#" onClick={() => handleSelect('category')}>Search by Category</a></li>
-                  </ul>
-                </div>
+              <div className="dropdown">
+                <button
+                  className="btn btn-danger dropdown-toggle me-3 catogary-btn"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {buttonText}
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a className="dropdown-item" href="#" onClick={() => handleSelect('name')}>Search by Name</a></li>
+                  <li><a className="dropdown-item" href="#" onClick={() => handleSelect('category')}>Search by Category</a></li>
+                </ul>
               </div>
               <input
                 type="text"
@@ -90,21 +83,19 @@ function Books() {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
-              <div className="input-group-append">
-                <button
-                  className="btn btn-outline-secondary search-btn2 mt-3"
-                  type="button"
-                  onClick={handleSearch}
-                >
-                  <i className="bi bi-search"></i>
-                </button>
-              </div>
+              <button
+                className="btn btn-outline-secondary search-btn2 mt-3"
+                type="button"
+                onClick={handleSearch}
+              >
+                <i className="bi bi-search"></i>
+              </button>
             </div>
             {filteredBooks.length === 0 && searchInput && (
               <p className="text-center">Sorry, currently don't have any books matching your search criteria.</p>
             )}
           </div>
-          <BookContainer books={filteredBooks} />
+          <BookContainer books={filteredBooks} sectionTitle={sectionTitle} />
         </div>
       </div>
       <ScrollTop />

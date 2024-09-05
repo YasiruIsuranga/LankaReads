@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/footer';
 import './OpenPage.css';
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
@@ -15,6 +14,7 @@ function OpenPage() {
   const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
   const { isDarkMode } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -38,17 +38,25 @@ function OpenPage() {
 
   const handlePayNow = async () => {
     try {
-      const amount = book.price * 100; // Convert to cents
-      const response = await axios.post('http://localhost:5000/create-checkout-session', {
-        amount,
-        bookId
-      });
-      const sessionUrl = response.data.url;
-      window.location.href = sessionUrl;
+        const amount = book.price * 100; // Convert to cents
+        const response = await axios.post('http://localhost:5000/create-checkout-session', {
+            amount,
+            bookId,
+            name: book.name,
+            image: book.image,
+            price: book.price,
+        });
+        const sessionUrl = response.data.url;
+        window.location.href = sessionUrl;
     } catch (error) {
-      console.error('Error during checkout:', error);
-      alert('There was an issue with the checkout. Please try again later.');
+        console.error('Error during checkout:', error);
+        alert('There was an issue with the checkout. Please try again later.');
     }
+  };
+  
+
+  const handleCashOnDelivery = () => {
+    navigate(`/delivery?bookId=${bookId}&name=${encodeURIComponent(book.name)}&price=${book.price}&image=${encodeURIComponent(book.image)}`);
   };
 
   return (
@@ -87,6 +95,12 @@ function OpenPage() {
                 >
                   Pay Now
                 </button>
+                <button
+                  className="btn btn-secondary flex-fill"
+                  onClick={handleCashOnDelivery}
+                >
+                  Cash on Delivery
+                </button>
               </div>
             </div>
           </div>
@@ -94,7 +108,7 @@ function OpenPage() {
           <div className="alert alert-info" role="alert">Loading book details...</div>
         )}
       </div>
-      <Footer />
+      
       <ScrollTop />
     </div>
   );

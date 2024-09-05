@@ -35,7 +35,6 @@
     color: white;
     border: 2px solid #f42d00;
     border-radius: 10px;
-    
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -50,13 +49,18 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive adjustments */
+.form-control {
+    width: auto;
+    max-width: 200px;
+    margin-right: 10px;
+}
+
 @media (max-width: 768px) {
     .subscription-title {
         font-size: 1.6rem;
     }
     .form-control {
-        max-width: 200px;
+        max-width: 180px;
     }
 }
 
@@ -65,10 +69,14 @@
         font-size: 1.4rem;
     }
     .form-control {
-        max-width: 180px;
+        max-width: 160px;
     }
     .btnsubscribe {
         font-size: 0.8rem;
         padding: 6px 15px;
     }
+}
+.input{
+  
+    margin-top: 18px !important;
 }
