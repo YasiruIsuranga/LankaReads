@@ -1,9 +1,8 @@
+// models/User.js
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
-// Create User Schema
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -19,7 +18,7 @@ const UserSchema = new Schema({
     }
 });
 
-// Encrypt password before saving
+// Hash password before saving
 UserSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         return next();
@@ -28,5 +27,10 @@ UserSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });
+
+// Match user-entered password with the hashed password in the database
+UserSchema.methods.matchPassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 
 module.exports = mongoose.model('User', UserSchema);

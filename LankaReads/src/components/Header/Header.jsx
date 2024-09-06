@@ -6,13 +6,23 @@ import logo2 from "../../img/logo2.png";
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import AddCart from '../AddCart/AddCart';
-import Wishlist from '../Wishlist/Wishlist';
 import { ThemeContext } from '../../contexts/ThemeContext'; // Import the ThemeContext
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 function Header() {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext); // Use context
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [user, setUser] = useState(null); // Store user details (name and email)
+  const navigate = useNavigate(); // React router navigation hook
 
   useEffect(() => {
+    // Check if user is already logged in (example with localStorage)
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setIsLoggedIn(true);
+      setUser(storedUser);
+    }
+
     const currentMode = localStorage.getItem('theme');
     if (currentMode === 'dark') {
       document.body.classList.add('dark-mode');
@@ -20,6 +30,13 @@ function Header() {
       document.body.classList.remove('dark-mode');
     }
   }, [isDarkMode]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    setUser(null);
+    navigate('/'); // Redirect to home after logout
+  };
 
   return (
     <>
@@ -46,7 +63,12 @@ function Header() {
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/About">About</a></li>
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/Blogs">Blogs</a></li>
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/Contact">Contact</a></li>
-                    <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/Register">Register</a></li>
+                    {!isLoggedIn && (
+                      <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/Register">Register</a></li>
+                    )}
+                    {isLoggedIn && (
+                      <li className="nav-item"><a className="nav-link px-2 px-lg-4" onClick={handleLogout}>Logout</a></li>
+                    )}
                   </ul>
                 </div>
               </nav>
@@ -56,11 +78,12 @@ function Header() {
               <button className="btn btn-light mx-2 mx-lg-3 py-2" onClick={toggleDarkMode}>
                 {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
               </button>
-              <ProfileCard />
+              <ProfileCard user={user} />
             </div>
           </div>
         </div>
       </header>
+
       <div className={`offcanvas offcanvas-start ${isDarkMode ? 'dark-mode' : ''}`} tabIndex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="mobileMenuLabel">Menu</h5>
@@ -73,7 +96,12 @@ function Header() {
             <li className="nav-item"><a className="nav-link" href="/About">About</a></li>
             <li className="nav-item"><a className="nav-link" href="/Blogs">Blogs</a></li>
             <li className="nav-item"><a className="nav-link" href="/Contact">Contact</a></li>
-            <li className="nav-item"><a className="nav-link" href="/Register">Register</a></li>
+            {!isLoggedIn && (
+              <li className="nav-item"><a className="nav-link" href="/Register">Register</a></li>
+            )}
+            {isLoggedIn && (
+              <li className="nav-item"><a className="nav-link" onClick={handleLogout}>Logout</a></li>
+            )}
           </ul>
         </div>
       </div>

@@ -1,0 +1,23 @@
+.admin-dashboard {
+    padding: 20px;
+}
+
+.dashboard-section {
+    margin-bottom: 30px;
+}
+
+.dashboard-section h2 {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: #f8f9fa;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}

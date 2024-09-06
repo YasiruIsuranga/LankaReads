@@ -5,6 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const Stripe = require('stripe');
 const bodyParser = require('body-parser');
+const authRoutes = require('../routes/auth');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -62,6 +63,11 @@ app.use(bodyParser.json());
 // Import and use book routes
 const bookRoutes = require('../routes/book'); // Adjust path as needed
 app.use('/api', bookRoutes); // Adjust this path as needed
+
+// Authentication routes
+
+app.use('/api/auth', authRoutes);
+
 
 // Route to handle subscription requests
 app.post('/subscribe', async (req, res) => {

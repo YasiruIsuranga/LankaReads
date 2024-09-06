@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // For redirection
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/footer";
 import './Register.css';
@@ -8,91 +10,228 @@ import ScrollTop from '../../components/Scroll-top/ScrollTop';
 
 function Register() {
     const [showLogin, setShowLogin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // NEW state to track login status
+    const [userData, setUserData] = useState({}); // Store user data after login
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    });
+    const [error, setError] = useState('');
 
-    const handleLoginClick = () => {
-        setShowLogin(true);
+    const navigate = useNavigate(); // Initialize useNavigate hook
+
+    // Show login modal
+    const handleLoginClick = () => setShowLogin(true);
+
+    // Close login modal
+    const handleCloseClick = () => setShowLogin(false);
+
+    // Handle input changes for registration form
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prevState => ({ ...prevState, [id]: value }));
     };
 
-    const handleCloseClick = () => {
-        setShowLogin(false);
+    // Handle registration form submission
+    const handleRegisterSubmit = async (e) => {
+        e.preventDefault();
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+        try {
+            await axios.post('http://localhost:5000/api/auth/register', formData);
+            alert('Registration successful!');
+            setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+        } catch (err) {
+            console.error(err);
+            setError("Registration failed. Try again.");
+        }
+    };
+
+    // Handle input changes for login form
+    const handleLoginInputChange = (e) => {
+        const { id, value } = e.target;
+        setLoginData(prevState => ({ ...prevState, [id]: value }));
+    };
+
+    // Handle login form submission
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/login', loginData);
+            alert("Login successful");
+
+            // Store token and user data
+            const { token, user } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user)); // Store user info
+
+            // Update state with user data
+            setIsLoggedIn(true);
+            setUserData(user);
+            setShowLogin(false); // Close the modal
+
+            // Redirect to the home page
+            navigate('/home');
+        } catch (err) {
+            console.error(err);
+            setError("Login failed. Check your credentials.");
+        }
     };
 
     return (
         <div className={`register-page ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}`}>
-            <Header />
+            <Header isLoggedIn={isLoggedIn} userData={userData} /> {/* Pass login status and user data to Header */}
             <div className="register-section">
-                <div className="container d-flex justify-content-center align-items-center min-vh-100">
-                    <div className="row w-100">
-                        <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                            <h2 className="text-center mb-3">Register Here</h2>
-                            <form className="shadow p-3 mb-4 rounded">
-                                <div className="form-group mb-3">
-                                    <label htmlFor="name" className="font-weight-bold">Name</label>
-                                    <input type="text" className="form-control form-control-sm" id="name" placeholder="Enter your name" />
+                {!isLoggedIn ? (
+                    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+                        <div className="row w-100">
+                            <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                                <h2 className="text-center mb-3">Register Here</h2>
+                                {error && <div className="alert alert-danger">{error}</div>}
+                                <form className="shadow p-3 mb-4 rounded" onSubmit={handleRegisterSubmit}>
+                                    <div className="form-group mb-3">
+                                        <label htmlFor="name" className="font-weight-bold">Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control form-control-sm"
+                                            id="name"
+                                            placeholder="Enter your name"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group mb-3">
+                                        <label htmlFor="email" className="font-weight-bold">Email address</label>
+                                        <input
+                                            type="email"
+                                            className="form-control form-control-sm"
+                                            id="email"
+                                            placeholder="Enter your email"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group mb-3">
+                                        <label htmlFor="password" className="font-weight-bold">Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control form-control-sm"
+                                            id="password"
+                                            placeholder="Create a password"
+                                            value={formData.password}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group mb-3">
+                                        <label htmlFor="confirmPassword" className="font-weight-bold">Confirm Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control form-control-sm"
+                                            id="confirmPassword"
+                                            placeholder="Confirm your password"
+                                            value={formData.confirmPassword}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="btn btn-danger btn-block py-1">Register</button>
+                                </form>
+                                <div className="text-center">
+                                    <p>or register with</p>
+                                    <GoogleLoginButton
+                                        onClick={() => alert("Google login")}
+                                        style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
+                                    />
+                                    <FacebookLoginButton
+                                        onClick={() => alert("Facebook login")}
+                                        style={{ width: '60%', transform: 'scale(0.9)' }}
+                                    />
                                 </div>
-                                <div className="form-group mb-3">
-                                    <label htmlFor="email" className="font-weight-bold">Email address</label>
-                                    <input type="email" className="form-control form-control-sm" id="email" placeholder="Enter your email" />
+                                <div className="text-center mt-2">
+                                    <p>Already have an account? <a href="#" onClick={handleLoginClick} style={{ color: '#f42d00' }}>Login here</a></p>
                                 </div>
-                                <div className="form-group mb-3">
-                                    <label htmlFor="password" className="font-weight-bold">Password</label>
-                                    <input type="password" className="form-control form-control-sm" id="password" placeholder="Create a password" />
-                                </div>
-                                <div className="form-group mb-3">
-                                    <label htmlFor="confirm-password" className="font-weight-bold">Confirm Password</label>
-                                    <input type="password" className="form-control form-control-sm" id="confirm-password" placeholder="Confirm your password" />
-                                </div>
-                                <button type="submit" className="btn btn-danger btn-block py-1">Register</button>
-                            </form>
-                            <div className="text-center">
-                                <p>or register with</p>
-                                <GoogleLoginButton onClick={() => alert("Google login")} style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }} />
-                                <FacebookLoginButton onClick={() => alert("Facebook login")} style={{ width: '60%', transform: 'scale(0.9)' }} />
-                            </div>
-                            <div className="text-center mt-2">
-                                <p>Already have an account? <a href="#" onClick={handleLoginClick} style={{ color: '#f42d00' }}>Login here</a></p>
                             </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <div className="container text-center">
+                        <h2>Welcome back, {userData.name}!</h2>
+                        <p>You are logged in as {userData.email}.</p>
+                    </div>
+                )}
             </div>
 
-            {showLogin && (
-                <div className="modal d-flex align-items-center justify-content-center login-modal">
+            {/* Login Modal */}
+            {showLogin && !isLoggedIn && (
+                <div className="modal show">
                     <div className="modal-dialog modal-dialog-centered modal-sm">
                         <div className="modal-content shadow-lg login-card">
                             <div className="modal-header">
-                                <h5 className="modal-title">Login</h5>
-                                <button type="button" className="close close-button" onClick={handleCloseClick}>
-                                    &times;
+                                <h5 className="modal-title" id="loginModalLabel">Login</h5>
+                                <button type="button" className="close" onClick={handleCloseClick} aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <form>
+                                <form onSubmit={handleLoginSubmit}>
                                     <div className="form-group mb-2">
-                                        <label htmlFor="login-email" className="font-weight-bold">Email address</label>
-                                        <input type="email" className="form-control form-control-sm" id="login-email" placeholder="Enter your email" />
+                                        <label htmlFor="email" className="font-weight-bold">Email address</label>
+                                        <input
+                                            type="email"
+                                            className="form-control form-control-sm"
+                                            id="email"
+                                            placeholder="Enter your email"
+                                            value={loginData.email}
+                                            onChange={handleLoginInputChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="form-group mb-2">
-                                        <label htmlFor="login-password" className="font-weight-bold">Password</label>
-                                        <input type="password" className="form-control form-control-sm" id="login-password" placeholder="Enter your password" />
+                                        <label htmlFor="password" className="font-weight-bold">Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control form-control-sm"
+                                            id="password"
+                                            placeholder="Enter your password"
+                                            value={loginData.password}
+                                            onChange={handleLoginInputChange}
+                                            required
+                                        />
                                     </div>
                                     <button type="submit" className="btn btn-danger btn-block mb-2">Login</button>
                                 </form>
                                 <div className="text-center">
-                                    <GoogleLoginButton onClick={() => alert("Google login")} style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }} />
-                                    <FacebookLoginButton onClick={() => alert("Facebook login")} style={{ width: '60%', transform: 'scale(0.9)' }} />
+                                    <GoogleLoginButton
+                                        onClick={() => alert("Google login")}
+                                        style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
+                                    />
+                                    <FacebookLoginButton
+                                        onClick={() => alert("Facebook login")}
+                                        style={{ width: '60%', transform: 'scale(0.9)' }}
+                                    />
                                 </div>
-                                <div className="text-center mt-2">
-                                    <p>Don't have an account? <a href="/register" style={{ color: '#f42d00' }}>Register here</a></p>
+                                <div className="text-center">
+                                    <p>Don't have an account? <a href="#" onClick={handleCloseClick} style={{ color: '#f42d00' }}>Register here</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
-            <Footer />
+
             <ScrollTop />
+            <Footer />
         </div>
     );
 }

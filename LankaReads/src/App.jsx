@@ -16,6 +16,7 @@ import OpenCartSelection from './pages/OpenCartSelection/OpenCartSelection';
 import MultipleDelivery from './pages/MultipleDelivery/MultipleDelivery';
 import BookDoc from './pages/BookDoc/BookDoc';
 import MultipleBookDoc from './pages/MultipleBookDoc/MultipleBookDoc';  // New import
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/multiplebookdoc" element={<MultipleBookDoc />} /> {/* New route */}
             <Route path="/delivery" element={<Delivery />} />
             <Route path="/multipledelivery" element={<MultipleDelivery />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="*" element={<div>Page Not Found</div>} /> {/* Catch-all route */}
           </Routes>
         </div>
