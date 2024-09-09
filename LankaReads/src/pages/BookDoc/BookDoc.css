@@ -1,0 +1,18 @@
+.bill-page {
+    padding: 20px;
+  }
+  
+  .bill-content {
+    text-align: center;
+  }
+  
+  .bill-image {
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .downpdfbtn {
+    margin-top: 20px;
+  }
+  
