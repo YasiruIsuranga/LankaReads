@@ -167,13 +167,16 @@ app.post('/api/delivery', async (req, res) => {
     const { name, email, phone, address, cartItems, totalPrice } = req.body;
   
     try {
-      // Save delivery details to MongoDB
-      const newDelivery = new Delivery({
+     // Save delivery details to MongoDB
+     const newDelivery = new Delivery({
         name,
         email,
         phone,
         address,
-        cartItems, // This will now save the cartItems array with name and price
+        cartItems: cartItems.map(item => ({
+          bookName: item.name,
+          bookPrice: item.price,
+        })),
         totalPrice,
       });
       await newDelivery.save();
