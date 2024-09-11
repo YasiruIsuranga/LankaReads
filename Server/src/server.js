@@ -61,7 +61,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Import and use book routes
-const bookRoutes = require('../routes/book'); // Adjust path as needed
+const bookRoutes = require('../routes/Book'); // Adjust path as needed
 app.use('/api', bookRoutes); // Adjust this path as needed
 
 // Authentication routes
@@ -165,27 +165,37 @@ app.delete('/api/subscriptions/:email', async (req, res) => {
 // Route to handle multiple delivery details submissions
 app.post('/api/delivery', async (req, res) => {
     const { name, email, phone, address, cartItems, totalPrice } = req.body;
-
+  
     try {
-        // Save delivery details to MongoDB
-        const newDelivery = new Delivery({ name, email, phone, address, cartItems, totalPrice });
-        await newDelivery.save();
-
-        // Send confirmation email
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Delivery Confirmation',
-            text: `Dear ${name},\n\nYour delivery order has been received. Details:\n\n${cartItems.map(item => `Book: ${item.name}\nPrice: $${item.price.toFixed(2)}\n`).join('')}\nTotal Price: $${totalPrice.toFixed(2)}\nAddress: ${address}\n\nThank you for your order!`,
-        };
-
-        await transporter.sendMail(mailOptions);
-        res.status(200).json({ message: 'Delivery details submitted successfully!' });
+      // Save delivery details to MongoDB
+      const newDelivery = new Delivery({
+        name,
+        email,
+        phone,
+        address,
+        cartItems, // This will now save the cartItems array with name and price
+        totalPrice,
+      });
+      await newDelivery.save();
+  
+      // Send confirmation email
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Delivery Confirmation',
+        text: `Dear ${name},\n\nYour delivery order has been received. Details:\n\n${cartItems
+          .map((item) => `Book: ${item.name}\nPrice: $${item.price.toFixed(2)}\n`)
+          .join('')}\nTotal Price: $${totalPrice.toFixed(2)}\nAddress: ${address}\n\nThank you for your order!`,
+      };
+  
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'Delivery details submitted successfully!' });
     } catch (error) {
-        console.error('Error submitting delivery details:', error);
-        res.status(500).json({ message: 'Failed to submit delivery details.' });
+      console.error('Error submitting delivery details:', error);
+      res.status(500).json({ message: 'Failed to submit delivery details.' });
     }
-});
+  });
+  
 
 // Route to handle single delivery details submissions
 app.post('/api/single/delivery', async (req, res) => {

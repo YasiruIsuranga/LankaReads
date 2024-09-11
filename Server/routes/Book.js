@@ -9,6 +9,7 @@ const bookSchema = new mongoose.Schema({
     price: { type: Number, required: true, min: 0 },
     category: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
+    bookdoc: { type: String, required: true }, // Add bookdoc URL field here
 });
 
 const Book = mongoose.model('Book', bookSchema);
@@ -42,8 +43,8 @@ router.get('/books', async (req, res) => {
 // Route to create a new book
 router.post('/books', async (req, res) => {
     try {
-        const { name, image, price, category, description } = req.body;
-        const newBook = new Book({ name, image, price, category, description });
+        const { name, image, price, category, description, bookdoc } = req.body; // Include bookdoc
+        const newBook = new Book({ name, image, price, category, description, bookdoc });
         await newBook.save();
         booksCache = null; // Clear cache to reflect new data
         res.status(201).json(newBook);  // Return the created book
@@ -56,7 +57,6 @@ router.post('/books', async (req, res) => {
 router.get('/books/:id', async (req, res) => {
     const bookId = req.params.id;
 
-    // Validate the ID before querying the database
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
         return res.status(400).json({ message: 'Invalid book ID format' });
     }
@@ -64,13 +64,14 @@ router.get('/books/:id', async (req, res) => {
     try {
         const book = await Book.findById(bookId); // Find a book by ID
         if (!book) return res.status(404).json({ message: 'Book not found' });
-        res.json(book);
+        res.json(book);  // Return the book, including the bookdoc field
     } catch (error) {
         res.status(500).json({ message: 'Error fetching book', error: error.message });
     }
 });
 
-// Route to update a book by ID
+
+// Route to update a book by Id
 router.put('/books/:id', async (req, res) => {
     try {
         const bookId = req.params.id;

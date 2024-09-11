@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../components/Footer/footer';
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import './MultipleDelivery.css';
@@ -47,11 +47,12 @@ function MultipleDelivery() {
     const deliveryDetails = {
       ...formData,
       cartItems: cart.map(item => ({
-        name: item.name, // Only include name
-        price: item.price, // Only include price
+        name: item.name, // Include book name
+        price: item.price, // Include book price
       })),
       totalPrice: totalPrice,
     };
+    
 
     try {
       console.log('Submitting with data:', deliveryDetails);

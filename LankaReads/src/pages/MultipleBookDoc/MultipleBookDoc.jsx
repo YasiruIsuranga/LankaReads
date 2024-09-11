@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/footer';
-import './MultipleBookDoc.css';  // Custom styles
+import './MultipleBookDoc.css';  // Custom style
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 
 function MultipleBookDoc() {

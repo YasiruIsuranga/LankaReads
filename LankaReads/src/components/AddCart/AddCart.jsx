@@ -37,23 +37,30 @@ function AddCart({ isDarkMode }) {
         </div>
         <div className="offcanvas-body d-flex flex-column">
           {cart.length > 0 ? (
-            cart.map((book, index) => (
-              <div key={index} className={`cart-item d-flex justify-content-between align-items-center mb-3 p-2 shadow-sm ${isDarkMode ? 'dark-mode' : ''}`}>
-                <div className="d-flex align-items-center">
-                  <img src={book.image} alt={book.title} className="cart-item-img" />
-                  <div className="ms-2">
-                    <h6 className={`mb-1 ${isDarkMode ? 'text-light' : ''}`}>{book.title}</h6>
-                    <p className={`mb-0 ${isDarkMode ? 'text-light' : ''}`}>${book.price}</p>
+            <>
+              {cart.map((book, index) => (
+                <div key={index} className={`cart-item d-flex justify-content-between align-items-center mb-3 p-2 shadow-sm ${isDarkMode ? 'dark-mode' : ''}`}>
+                  <div className="d-flex align-items-center">
+                    <img src={book.image} alt={book.title} className="cart-item-img" />
+                    <div className="ms-2">
+                      <h6 className={`mb-1 ${isDarkMode ? 'text-light' : ''}`}>{book.name}</h6>
+                      <p className={`mb-0 ${isDarkMode ? 'text-light' : ''}`}>${book.price.toFixed(2)}</p>
+                    </div>
                   </div>
+                  <button className={`btn btn-danger btn-sm ${isDarkMode ? 'dark-mode' : ''}`} onClick={() => removeFromCart(index)}>Remove</button>
                 </div>
-                <button className={`btn btn-danger btn-sm ${isDarkMode ? 'dark-mode' : ''}`} onClick={() => removeFromCart(index)}>Remove</button>
+              ))}
+
+              {/* Display Total Price */}
+              <div className={`total-price text-end mt-3 ${isDarkMode ? 'text-light' : ''}`}>
+                <h5>Total: ${getTotalPrice().toFixed(2)}</h5>
               </div>
-            ))
+            </>
           ) : (
             <p className={`text-center ${isDarkMode ? 'text-light' : ''}`}>Your cart is empty.</p>
           )}
           <div className="mt-auto text-center">
-            <button className={`btn btn-secondary ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleViewPayment}>View Payment</button>
+            <button className={`btn btn-secondary ${isDarkMode ? 'dark-mode' : ''}`} onClick={handleViewPayment}>View to Payment</button>
           </div>
         </div>
       </div>

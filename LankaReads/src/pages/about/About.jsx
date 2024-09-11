@@ -7,6 +7,34 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 
 function About() {
+  const teamMembers = [
+    {
+      src: "https://media.licdn.com/dms/image/C5603AQEgD1od1hmy_g/profile-displayphoto-shrink_800_800/0/1639229911241?e=1727913600&v=beta&t=9d3lkq1bmrkwZUIJtc-azjOR1RknBVJPd9m9Nbg1fBw",
+      name: "Jinendra Bogahawatte",
+      role: "Founder & CEO"
+    },
+    {
+      src: "https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/416966742_1388778555155578_6637920395080445658_n.jpg?ccb=11-4&oh=01_Q5AaIH-9DQFcWVVqSa6ap4m54Bn2twcJIGzlm9ND1gTgXcBf&oe=66B95769&_nc_sid=e6ed6c&_nc_cat=107",
+      name: "Ravindu Asiri",
+      role: "Head of Community"
+    },
+    {
+      src: "https://via.placeholder.com/200",
+      name: "Mr.Priyanga",
+      role: "Content Manager"
+    },
+    {
+      src: "https://media.licdn.com/dms/image/D5635AQFvdFJAXMRrFg/profile-framedphoto-shrink_800_800/0/1695889497875?e=1723176000&v=beta&t=3OuPYekEd53O3Zr7Z_dAt1-oD2dgoxOPT70me4RZ1gw",
+      name: "Yasiru Isuranga",
+      role: "Developer"
+    },
+    {
+      src: "https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/432125538_427989870217862_2926967102665917507_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_Q5AaIM1M9gya_cxl2tp9D-DruorBOZBqg_QX9zmrAL9e4wak&oe=66B984FA&_nc_sid=e6ed6c&_nc_cat=102",
+      name: "Chamika Vishwakumara",
+      role: "Developer"
+    }
+  ];
+
   return (
     <>
       <Header />
@@ -64,50 +92,40 @@ function About() {
             <div className="col-12 mb-4">
               <h3 className="mb-4">Meet Our Team</h3>
             </div>
-            {[
-              {
-                src: "https://media.licdn.com/dms/image/C5603AQEgD1od1hmy_g/profile-displayphoto-shrink_800_800/0/1639229911241?e=1727913600&v=beta&t=9d3lkq1bmrkwZUIJtc-azjOR1RknBVJPd9m9Nbg1fBw",
-                name: "Jinendra Bogahawatte",
-                role: "Founder & CEO"
-              },
-              {
-                src: "https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/416966742_1388778555155578_6637920395080445658_n.jpg?ccb=11-4&oh=01_Q5AaIH-9DQFcWVVqSa6ap4m54Bn2twcJIGzlm9ND1gTgXcBf&oe=66B95769&_nc_sid=e6ed6c&_nc_cat=107",
-                name: "Ravindu Asiri",
-                role: "Head of Community"
-              },
-              {
-                src: "https://via.placeholder.com/200",
-                name: "Mr.Priyanga",
-                role: "Content Manager"
-              },
-              {
-                src: "https://media.licdn.com/dms/image/D5635AQFvdFJAXMRrFg/profile-framedphoto-shrink_800_800/0/1695889497875?e=1723176000&v=beta&t=3OuPYekEd53O3Zr7Z_dAt1-oD2dgoxOPT70me4RZ1gw",
-                name: "Yasiru Isuranga",
-                role: "Developer"
-              },
-              {
-                src: "https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/432125538_427989870217862_2926967102665917507_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_Q5AaIM1M9gya_cxl2tp9D-DruorBOZBqg_QX9zmrAL9e4wak&oe=66B984FA&_nc_sid=e6ed6c&_nc_cat=102",
-                name: "Chamika Vishwakumara",
-                role: "Developer"
-              },
-              {
-                src: "https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/368231961_283393191302369_5421438434990260938_n.jpg?ccb=11-4&oh=01_Q5AaIA0KTEMFR8myUG0Kc3itY96tckvxLaNzilC6D_Gq2mM1&oe=66B95352&_nc_sid=e6ed6c&_nc_cat=110",
-                name: "Kalpa Maduranga",
-                role: "Developer"
-              }
-            ].map((member, index) => (
-              <div className="col-md-4 mb-4" key={index}>
-                <img src={member.src} alt="Team Member" className="rounded-circle mb-3 shadow-lg"
-                  style={{ width: '144px', height: '144px', objectFit: 'cover' }} />
-                <h5>{member.name}</h5>
-                <p>{member.role}</p>
-                <div>
-                  <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-twitter"></i></a>
-                  <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-facebook"></i></a>
-                  <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-linkedin"></i></a>
+            
+            {/* First row with 3 members */}
+            <div className="row">
+              {teamMembers.slice(0, 3).map((member, index) => (
+                <div className="col-md-4 mb-4" key={index}>
+                  <img src={member.src} alt="Team Member" className="rounded-circle mb-3 shadow-lg"
+                    style={{ width: '144px', height: '144px', objectFit: 'cover' }} />
+                  <h5>{member.name}</h5>
+                  <p>{member.role}</p>
+                  <div>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-twitter"></i></a>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-facebook"></i></a>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-linkedin"></i></a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            {/* Second row with 2 centered members */}
+            <div className="row justify-content-center">
+              {teamMembers.slice(3, 5).map((member, index) => (
+                <div className="col-md-4 mb-4" key={index}>
+                  <img src={member.src} alt="Team Member" className="rounded-circle mb-3 shadow-lg"
+                    style={{ width: '144px', height: '144px', objectFit: 'cover' }} />
+                  <h5>{member.name}</h5>
+                  <p>{member.role}</p>
+                  <div>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-twitter"></i></a>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-facebook"></i></a>
+                    <a href="#" className="text-decoration-none mx-2" style={{ color: '#f42d00' }}><i className="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           
         </div>

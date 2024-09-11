@@ -1,129 +1,127 @@
-/* Hero container styling */
 .hero-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   overflow: hidden;
 }
 
-/* Hero image styling */
 .hero-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cover the entire container */
+  height: 100vh;
+  object-fit: cover;
+}
+
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/* Hero overlay styling */
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: white;
   text-align: center;
-  z-index: 1; /* Ensure overlay is on top of the image */
   padding: 20px;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  border-radius: 10px; /* Rounded corners for better aesthetics */
 }
 
-/* Welcome text styling */
 .welcome {
-  font-size: 2rem; /* Adjusted font size */
-  margin: 0; /* Remove default margin */
+  font-size: 2.5rem;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #f42d00; /* Orange for contrast */
 }
 
-/* Main title styling */
-.m-20.lanka {
-  font-size: 3rem; /* Adjusted font size */
+.lanka {
+  font-size: 3.5rem;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #fff; /* White for better visibility */
+}
+
+.description {
+  font-size: 1.1rem;
+  font-family: 'Verdana', sans-serif;
+  margin: 15px 0;
+  max-width: 700px;
+}
+
+.buttons-container {
   margin: 20px 0;
 }
 
-/* Be a Reader / Be an Author text styling */
-.beRA {
-  display: flex; /* Flex layout for proper alignment */
-  justify-content: center; /* Center the items */
-  gap: 15px; /* Space between the items */
-  margin-bottom: 20px;
-  font-size: 1rem; /* Adjust font size */
-  padding: 0 15px; /* Add horizontal padding */
+.reader-btn, .author-btn {
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  border-radius: 10px;
+  background-color: #f42d00; /* Orange color */
+  border: none;
+  color: white;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
-/* Description text styling */
-.dis {
-  margin: 20px 0;
-  font-size: 1rem; /* Adjusted font size */
-  padding: 0 15px; /* Add horizontal padding */
+.reader-btn:hover, .author-btn:hover {
+  background-color: #d72300; /* Darker orange on hover */
+  transform: scale(1.05);
 }
 
-/* Card slider container styling */
 .card-slider-container {
-  position: relative;
+  margin-top: 30px;
+}
+
+.author-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 1200px; /* Adjust as needed */
-  margin: 0 auto; /* Center the CardSlider */
-  padding-top: 20px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .hero-overlay {
-    padding: 15px; /* Reduced padding for smaller screens */
-  }
-
-  .welcome {
-    font-size: 1.5rem; /* Smaller font size */
-  }
-
-  .m-20.lanka {
-    font-size: 2.5rem; /* Smaller font size */
-    margin: 15px 0;
-  }
-
-  .beRA {
-    font-size: 0.9rem; /* Slightly smaller font size */
-    gap: 10px; /* Adjust space between items */
-  }
-
-  .dis {
-    font-size: 0.9rem; /* Slightly smaller font size */
-    padding: 0 10px; /* Reduced horizontal padding */
-  }
-
-  .card-slider-container {
-    max-width: 100%;
-    padding-top: 15px; /* Reduced padding for smaller screens */
-  }
+.modal-content {
+  background: #333; /* Dark background for modal */
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.4);
+  animation: modalFadeIn 0.5s ease-in-out;
 }
 
-@media (max-width: 576px) {
-  .hero-overlay {
-    padding: 10px; /* Further reduced padding for very small screens */
-  }
+.modal-content p {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
 
-  .welcome {
-    font-size: 1.25rem; /* Smaller font size */
-  }
+.modal-content button {
+  margin: 10px;
+  padding: 12px 25px;
+  border-radius: 8px;
+  background-color: #f42d00; /* Orange button in the modal */
+  color: white;
+  border: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
 
-  .m-20.lanka {
-    font-size: 2rem; /* Smaller font size */
-    margin: 10px 0;
-  }
+.modal-content button:hover {
+  background-color: #d72300; /* Darker orange on hover */
+  transform: scale(1.05);
+}
 
-  .beRA {
-    font-size: 0.8rem; /* Further reduced font size */
-    gap: 5px; /* Adjust space between items */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
   }
-
-  .dis {
-    font-size: 0.8rem; /* Further reduced font size */
-    padding: 0 5px; /* Further reduced horizontal padding */
-  }
-
-  .card-slider-container {
-    padding-top: 10px; /* Reduced padding for very small screens */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

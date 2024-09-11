@@ -15,4 +15,23 @@
   .downpdfbtn {
     margin-top: 20px;
   }
+  .bill-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .bill-content {
+    margin: auto;
+    padding: 20px;
+    max-width: 600px;
+  }
+  
+  .bill-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .downpdfbtn {
+    margin-top: 20px;
+  }
   

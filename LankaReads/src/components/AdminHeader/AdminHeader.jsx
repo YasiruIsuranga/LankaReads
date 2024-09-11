@@ -61,6 +61,7 @@ function Header() {
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/AdminSubscription">Subscription</a></li>
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/AdminDelivery">Deliveries</a></li>
                     <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/adminusers">Users</a></li>
+                    <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/adminblogs">blogs</a></li>
                   </ul>
                 </div>
               </nav>
@@ -91,6 +92,7 @@ function Header() {
             <li className="nav-item"><a className="nav-link" href="/AdminSubscription">Subscription</a></li>
             <li className="nav-item"><a className="nav-link" href="/AdminDelivery">Deliveries</a></li>
             <li className="nav-item"><a className="nav-link" href="/adminusers">Users</a></li>
+            <li className="nav-item"><a className="nav-link px-2 px-lg-4" href="/adminblogs">blogs</a></li>
             {!isLoggedIn && (
               <li className="nav-item"><a className="nav-link" href="/Register">Register</a></li>
             )}

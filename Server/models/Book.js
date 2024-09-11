@@ -1,5 +1,3 @@
-// models/Book.js
-
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
@@ -23,7 +21,10 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-   
+    bookdoc: {
+        type: String,
+        required: true,  // Add this to store the book PDF link
+    },
 });
 
 const Book = mongoose.model('Book', bookSchema);

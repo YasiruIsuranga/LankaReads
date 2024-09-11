@@ -40,6 +40,10 @@ function OpenCartSelection() {
     }
   };
 
+  const handleViewBook = (bookId) => {
+    navigate(`/openpage/${bookId}`);
+  };
+
   return (
     <div className={`open-pages ${isDarkMode ? 'dark-mode' : ''}`}>
       <Header />
@@ -57,6 +61,13 @@ function OpenCartSelection() {
                       ${book.price.toFixed(2)} x {book.quantity || 1}
                     </div>
                   </div>
+                  {/* Add the View button */}
+                  <button 
+                    className="btn btn-info ms-3" 
+                    onClick={() => handleViewBook(book._id)}
+                  >
+                    View
+                  </button>
                 </div>
               ))}
               <div>
