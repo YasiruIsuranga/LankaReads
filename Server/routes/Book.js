@@ -1,18 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
-// Define the Book schema and model
-const bookSchema = new mongoose.Schema({
-    name: { type: String, required: true, trim: true },
-    image: { type: String, required: true },
-    price: { type: Number, required: true, min: 0 },
-    category: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
-    bookdoc: { type: String, required: true }, // Add bookdoc URL field here
-});
-
-const Book = mongoose.model('Book', bookSchema);
+const Book = require('../models/Book');
 
 // Cache to store books
 let booksCache = null;
@@ -43,34 +32,42 @@ router.get('/books', async (req, res) => {
 // Route to create a new book
 router.post('/books', async (req, res) => {
     try {
-        const { name, image, price, category, description, bookdoc } = req.body; // Include bookdoc
+        const { name, image, price, category, description, bookdoc } = req.body;
         const newBook = new Book({ name, image, price, category, description, bookdoc });
         await newBook.save();
         booksCache = null; // Clear cache to reflect new data
-        res.status(201).json(newBook);  // Return the created book
+        res.status(201).json(newBook);
     } catch (error) {
         res.status(400).json({ message: 'Error creating book', error: error.message });
     }
 });
 
-// Route to get a specific book by ID
 router.get('/books/:id', async (req, res) => {
     const bookId = req.params.id;
-
+  
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
-        return res.status(400).json({ message: 'Invalid book ID format' });
+      return res.status(400).json({ message: 'Invalid book ID format' });
     }
-
+  
     try {
-        const book = await Book.findById(bookId); // Find a book by ID
-        if (!book) return res.status(404).json({ message: 'Book not found' });
-        res.json(book);  // Return the book, including the bookdoc field
+      const book = await Book.findById(bookId);
+      if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+      }
+  
+      // Send the book details including the document URL (bookdoc)
+      res.json({
+        name: book.name,
+        price: book.price,
+        image: book.image,
+        bookdoc: book.bookdoc,
+      });
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching book', error: error.message });
+      console.error('Error fetching book:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
-});
-
-
+  });
+  
 // Route to update a book by Id
 router.put('/books/:id', async (req, res) => {
     try {

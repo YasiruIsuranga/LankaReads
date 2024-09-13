@@ -5,7 +5,7 @@ app.use(express.json()); // To parse JSON bodies
 
 // Route to create a checkout session with Stripe
 app.post('/create-checkout-session', async (req, res) => {
-    const { amount, bookId, name, image, price } = req.body;
+    const { amount, bookId, name, image, price,bookdoc } = req.body;
 
     try {
         // Ensure BASE_URL is defined
@@ -37,6 +37,7 @@ app.post('/create-checkout-session', async (req, res) => {
                 bookId: bookId,
                 bookName: name,
                 bookPrice: price,
+                bookDoc: bookdoc,
             },
         });
 

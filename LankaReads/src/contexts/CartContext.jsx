@@ -16,10 +16,12 @@ export const CartProvider = ({ children }) => {
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
+    
   }, [cart]);
 
   const addToCart = (book) => {
     setCart((prevCart) => [...prevCart, book]);
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   const removeFromCart = (index) => {

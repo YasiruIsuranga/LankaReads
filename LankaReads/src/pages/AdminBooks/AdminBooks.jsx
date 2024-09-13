@@ -9,16 +9,14 @@ const AdminBooks = () => {
     image: '',
     price: '',
     category: '',
-    description: ''
+    description: '',
+    bookdoc: '', // Added bookdoc for PDF link
   });
   const [editingBook, setEditingBook] = useState(null);
-  const [categories, setCategories] = useState([]); // Manage categories
-  const [newCategory, setNewCategory] = useState(''); // Add new category
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchBooks();
-    fetchCategories(); // Fetch categories when component mounts
   }, []);
 
   // Fetch all books from the API
@@ -31,19 +29,6 @@ const AdminBooks = () => {
     } catch (error) {
       setError('Error fetching books');
       console.error('Error fetching books:', error);
-    }
-  };
-
-  // Fetch categories from the API
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/books');
-      if (!response.ok) throw new Error('Failed to fetch categories');
-      const data = await response.json();
-      setCategories(data);
-    } catch (error) {
-      setError('Error fetching categories');
-      console.error('Error fetching categories:', error);
     }
   };
 
@@ -65,7 +50,7 @@ const AdminBooks = () => {
       if (!response.ok) throw new Error('Error creating book');
       const createdBook = await response.json();
       setBooks([...books, createdBook]);
-      setNewBook({ name: '', image: '', price: '', category: '', description: '' });
+      setNewBook({ name: '', image: '', price: '', category: '', description: '', bookdoc: '' }); // Reset form
     } catch (error) {
       setError('Error creating book');
       console.error('Error creating book:', error);
@@ -85,7 +70,7 @@ const AdminBooks = () => {
       const updatedBook = await response.json();
       setBooks(books.map((book) => (book._id === updatedBook._id ? updatedBook : book)));
       setEditingBook(null);
-      setNewBook({ name: '', image: '', price: '', category: '', description: '' });
+      setNewBook({ name: '', image: '', price: '', category: '', description: '', bookdoc: '' });
     } catch (error) {
       setError('Error updating book');
       console.error('Error updating book:', error);
@@ -112,124 +97,142 @@ const AdminBooks = () => {
       price: book.price,
       category: book.category,
       description: book.description,
+      bookdoc: book.bookdoc, // Include bookdoc when editing
     });
   };
 
   return (
     <>
-    <AdminHeader/>
-    <div className="admin-dashboard container">
-     
+      <AdminHeader />
+      <div className="admin-dashboard container">
+        {/* Display error message */}
+        {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* Display error message */}
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      {/* Form for creating/editing books */}
-      <form className="form-book mb-5" onSubmit={editingBook ? updateBook : createBook}>
-        <div className="row g-3">
-          <div className="col-md-6">
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              placeholder="Book Name"
-              value={newBook.name}
-              onChange={handleInputChange}
-              required
-            />
+        {/* Form for creating/editing books */}
+        <form className="form-book mb-5" onSubmit={editingBook ? updateBook : createBook}>
+          <div className="row g-3">
+            <div className="col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Book Name"
+                value={newBook.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                name="image"
+                placeholder="Image URL"
+                value={newBook.image}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <input
-              type="text"
-              className="form-control"
-              name="image"
-              placeholder="Image URL"
-              value={newBook.image}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-        </div>
 
-        <div className="row g-3 mt-2">
-          <div className="col-md-6">
-            <input
-              type="number"
-              className="form-control"
-              name="price"
-              placeholder="Price"
-              value={newBook.price}
-              onChange={handleInputChange}
-              required
-            />
+          <div className="row g-3 mt-2">
+            <div className="col-md-6">
+              <input
+                type="number"
+                className="form-control"
+                name="price"
+                placeholder="Price"
+                value={newBook.price}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                name="category"
+                placeholder="Category" // Changed to a text input for typing categories
+                value={newBook.category}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <select
-              name="category"
-              className="form-select"
-              value={newBook.category}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat.name}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
+
+          <div className="row g-3 mt-2">
+            <div className="col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                name="bookdoc"
+                placeholder="Book PDF URL" // Input for the bookdoc (PDF link)
+                value={newBook.bookdoc}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="col-md-6">
+              <textarea
+                className="form-control"
+                name="description"
+                placeholder="Description"
+                value={newBook.description}
+                onChange={handleInputChange}
+                required
+              ></textarea>
+            </div>
           </div>
-        </div>
 
-        <div className="row g-3 mt-2">
-          <div className="col-12">
-            <textarea
-              className="form-control"
-              name="description"
-              placeholder="Description"
-              value={newBook.description}
-              onChange={handleInputChange}
-              required
-            ></textarea>
-          </div>
-        </div>
+          <button type="submit" className="btn btn-primary mt-3">
+            {editingBook ? 'Update Book' : 'Add Book'}
+          </button>
+        </form>
 
-        <button type="submit" className="btn btn-primary mt-3">
-          {editingBook ? 'Update Book' : 'Add Book'}
-        </button>
-      </form>
-
-      {/* Display all books */}
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Image</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book) => (
-              <tr key={book._id}>
-                <td>{book.name}</td>
-                <td><img src={book.image} alt={book.name} className="book-img" /></td>
-                <td>${book.price}</td>
-                <td>{book.category}</td>
-                <td>{book.description}</td>
-                <td>
-                  <button className="btn btn-primary me-2" onClick={() => editBook(book)}>Edit</button>
-                  <button className="btn btn-danger" onClick={() => deleteBook(book._id)}>Delete</button>
-                </td>
+        {/* Display all books */}
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>PDF</th> {/* New column for the book PDF */}
+                <th>Description</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {books.map((book) => (
+                <tr key={book._id}>
+                  <td>{book.name}</td>
+                  <td>
+                    <img src={book.image} alt={book.name} className="book-img" />
+                  </td>
+                  <td>${book.price}</td>
+                  <td>{book.category}</td>
+                  <td>
+                    <a href={book.bookdoc} target="_blank" rel="noopener noreferrer">
+                      View PDF
+                    </a>
+                  </td> {/* Link to book PDF */}
+                  <td>{book.description}</td>
+                  <td>
+                    <button className="btn btn-primary me-2" onClick={() => editBook(book)}>
+                      Edit
+                    </button>
+                    <button className="btn btn-danger" onClick={() => deleteBook(book._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div></>
+    </>
   );
 };
 
