@@ -7,6 +7,9 @@ const Stripe = require('stripe');
 const bodyParser = require('body-parser');
 const authRoutes = require('../routes/auth');
 
+const oauthRouter = require('../routes/oauth');
+const requestRouter = require('../routes/request')
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -59,6 +62,10 @@ const transporter = nodemailer.createTransport({
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+
+//register and login with google
+app.use('/oauth', oauthRouter);
+app.use('/request',requestRouter)
 
 // Import and use book routes
 const bookRoutes = require('../routes/Book'); // Adjust path as needed

@@ -79,7 +79,8 @@ function Header() {
                     {isLoggedIn && (
                       <li className="nav-item">
                         <a 
-                          className="nav-link px-2 px-lg-4 cursor-pointer" 
+                          className="nav-link px-2 px-lg-4 "
+                          style={{ cursor: 'pointer' }}
                           onClick={handleLogout}
                         >
                           Logout

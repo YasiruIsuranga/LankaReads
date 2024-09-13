@@ -10,7 +10,7 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 
 // Google login route
-router.post('/google-login', googleLoginUser);
+// router.post('/google-login', googleLoginUser);
 
 // Route to fetch all users (for admin)
 router.get('/users', async (req, res) => {

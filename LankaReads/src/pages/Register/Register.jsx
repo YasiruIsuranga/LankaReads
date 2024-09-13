@@ -8,6 +8,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
 import ScrollTop from '../../components/Scroll-top/ScrollTop';
 
+function navigate(url){
+    window.location.href = url
+}
+
+async function auth(){
+    const response = await fetch('http://127.0.0.1:5000/request',{method:'post'});
+    const data = await response.json();
+    navigate(data.url);
+}
+
 function Register() {
     const [showLogin, setShowLogin] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // NEW state to track login status
@@ -150,7 +160,7 @@ function Register() {
                                 <div className="text-center">
                                     <p>or register with</p>
                                     <GoogleLoginButton
-                                        onClick={() => alert("Google login")}
+                                        onClick={() => auth()}
                                         style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
                                     />
                                     <FacebookLoginButton
@@ -213,7 +223,7 @@ function Register() {
                                 </form>
                                 <div className="text-center">
                                     <GoogleLoginButton
-                                        onClick={() => alert("Google login")}
+                                        onClick={() => auth()}
                                         style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
                                     />
                                     <FacebookLoginButton
