@@ -22,6 +22,19 @@ function Header() {
     if (storedUser) {
       setIsLoggedIn(true);
       setUser(storedUser);
+    } else {
+      // If not found, check URL params for Google OAuth login
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+      const name = urlParams.get('name');
+      const email = urlParams.get('email');
+
+      if (userId && name && email) {
+        const newUser = { _id: userId, name, email };
+        localStorage.setItem('user', JSON.stringify(newUser)); // Store in localStorage
+        setIsLoggedIn(true);
+        setUser(newUser); // Update the state to reflect login
+      }
     }
 
     const currentMode = localStorage.getItem('theme');

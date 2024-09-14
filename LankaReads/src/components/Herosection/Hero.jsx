@@ -43,9 +43,9 @@ const Hero = () => {
       <div className="hero-overlay">
         <p className='welcome'>Welcome to...</p>
         <p className='lanka'>Lanka Reads</p>
-        <div className='d-flex justify-content-around buttons-container'>
-          <button className="btn btn-primary reader-btn" onClick={handleReaderClick}>Be a Reader</button>
-          <button className="btn btn-secondary author-btn" onClick={handleAuthorClick}>Be an Author</button>
+        <div className='hero-buttons-container'>
+          <button className="reader-btn" onClick={handleReaderClick}>Be a Reader</button>
+          <button className="author-btn" onClick={handleAuthorClick}>Be an Author</button>
         </div>
         <p className='description'>
           Lanka Reads is the best and most popular online bookshop in Sri Lanka. It offers a wide range of digital books for avid readers.

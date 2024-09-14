@@ -45,6 +45,7 @@ function OpenPage() {
             name: book.name,
             image: book.image,
             price: book.price,
+            bookdoc: book.bookdoc,
         });
         const sessionUrl = response.data.url;
         window.location.href = sessionUrl;

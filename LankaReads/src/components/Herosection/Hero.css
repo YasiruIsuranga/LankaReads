@@ -49,16 +49,19 @@
   max-width: 700px;
 }
 
-.buttons-container {
-  margin: 20px 0;
+.hero-buttons-container {
+  margin: 12px 0;
+  width: 500px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .reader-btn, .author-btn {
   font-size: 1.1rem;
   padding: 12px 25px;
-  border-radius: 10px;
-  background-color: #f42d00; /* Orange color */
-  border: none;
+  border-radius: 20px;
+  background-color: transparent; /* Orange color */
+  border: 3px solid #d72300;
   color: white;
   transition: transform 0.3s, background-color 0.3s;
 }
@@ -66,6 +69,7 @@
 .reader-btn:hover, .author-btn:hover {
   background-color: #d72300; /* Darker orange on hover */
   transform: scale(1.05);
+  font-weight: bold;
 }
 
 .card-slider-container {

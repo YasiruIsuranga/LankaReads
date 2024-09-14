@@ -78,18 +78,29 @@ function Register() {
             const response = await axios.post('http://localhost:5000/api/auth/login', loginData);
             alert("Login successful");
 
-            // Store token and user data
             const { token, user } = response.data;
+
+        // Check if the logged-in user is the admin
+        if (loginData.email === 'admin@gmail.com' && loginData.password === 'admin1234') {
+            // Store the admin user data and token in local storage
             localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user)); // Store user info
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Redirect to the admin page
+            navigate('/admindashboard');
+        } else {
+            // Store token and user data for non-admin users
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
 
             // Update state with user data
             setIsLoggedIn(true);
             setUserData(user);
             setShowLogin(false); // Close the modal
 
-            // Redirect to the home page
+            // Redirect to the home page for non-admin users
             navigate('/home');
+        }
         } catch (err) {
             console.error(err);
             setError("Login failed. Check your credentials.");
@@ -161,12 +172,12 @@ function Register() {
                                     <p>or register with</p>
                                     <GoogleLoginButton
                                         onClick={() => auth()}
-                                        style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
+                                        style={{ width: '100%', marginBottom: '8px', transform: 'scale(0.9)' }}
                                     />
-                                    <FacebookLoginButton
+                                    {/* <FacebookLoginButton
                                         onClick={() => alert("Facebook login")}
                                         style={{ width: '60%', transform: 'scale(0.9)' }}
-                                    />
+                                    /> */}
                                 </div>
                                 <div className="text-center mt-2">
                                     <p>Already have an account? <a href="#" onClick={handleLoginClick} style={{ color: '#f42d00' }}>Login here</a></p>
@@ -224,12 +235,12 @@ function Register() {
                                 <div className="text-center">
                                     <GoogleLoginButton
                                         onClick={() => auth()}
-                                        style={{ width: '60%', marginBottom: '8px', transform: 'scale(0.9)' }}
+                                        style={{ width: '100%', marginBottom: '8px', transform: 'scale(0.9)' }}
                                     />
-                                    <FacebookLoginButton
+                                    {/* <FacebookLoginButton
                                         onClick={() => alert("Facebook login")}
                                         style={{ width: '60%', transform: 'scale(0.9)' }}
-                                    />
+                                    /> */}
                                 </div>
                                 <div className="text-center">
                                     <p>Don't have an account? <a href="#" onClick={handleCloseClick} style={{ color: '#f42d00' }}>Register here</a></p>

@@ -14,24 +14,37 @@ function MultipleBookDoc() {
   // Fetch cart and total price from URL query parameters
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const cartData = queryParams.get('cart');
-    const totalPriceData = queryParams.get('totalPrice');
-    if (cartData) {
-      setCart(JSON.parse(decodeURIComponent(cartData)));
-    }
-    if (totalPriceData) {
-      setTotalPrice(parseFloat(totalPriceData));
+    
+    const totalPrice = queryParams.get('totalPrice');
+
+    // Parse and decode the cart data and total price
+
+    
+    if (totalPrice) {
+      setTotalPrice(parseFloat(totalPrice));
+      setCart(JSON.parse(localStorage.getItem("cart")));
     }
   }, [location]);
 
   // Function to generate and download a unique .txt file
-  const handleDownload = (book) => {
+  const handleDownloadInfo = (book) => {
     const content = `Book Name: ${book.name}\nPrice: $${book.price.toFixed(2)}\nThank you for your purchase!`;
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.download = `${book.name}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Function to download the book document (PDF or any other type of file)
+  const handleDownloadDoc = (bookdoc, name) => {
+    const link = document.createElement('a');
+    link.href = bookdoc;
+    link.target="_blank"
+    link.download = `${name}_document.pdf`; // Adjust the file extension if needed
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -50,7 +63,16 @@ function MultipleBookDoc() {
                   <img src={book.image} alt={book.name} className="book-image mb-3" style={{ maxHeight: '150px', objectFit: 'cover' }} />
                   <h5>{book.name}</h5>
                   <p className="text-muted">Price: ${book.price.toFixed(2)}</p>
-                  <button className="btn btn-primary" onClick={() => handleDownload(book)}>Download Info</button>
+                  
+                  <div className="d-flex justify-content-between">
+                    {/* Download info button */}
+                    <button className="btn btn-primary me-2" onClick={() => handleDownloadInfo(book)}>Download Info</button>
+
+                    {/* Download book document */}
+                    {book.bookdoc && (
+                      <button className="btn btn-success" onClick={() => handleDownloadDoc(book.bookdoc, book.name)}>Download Book</button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

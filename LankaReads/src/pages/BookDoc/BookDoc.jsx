@@ -1,58 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { storage } from '../../firebaseConfig'; // Import Firebase storage
 import './BookDoc.css';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/footer';
+import Footer from '../../components/Footer/footer';  // Ensure import path is correct
 
 const BookDoc = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
 
+  // Extract details from URL query parameters
   const bookId = queryParams.get('bookId');
   const name = queryParams.get('name');
   const price = queryParams.get('price');
   const image = queryParams.get('image');
-  const bookdocPath = queryParams.get('bookdoc'); // Path to PDF in Firebase Storage
-  
-  const [pdfUrl, setPdfUrl] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const initialBookDoc = queryParams.get('bookdoc'); // Initial value from URL params
+  const [bookDocUrl, setBookDocUrl] = useState(initialBookDoc); // Set initial state from URL params
 
-  // Fetch the PDF URL from Firebase Storage
   useEffect(() => {
-    if (bookdocPath) {
-      const fetchPdfUrl = async () => {
-        try {
-          // Reference to the PDF file in Firebase Storage
-          const pdfRef = ref(storage, bookdocPath); 
-          const url = await getDownloadURL(pdfRef);
-          setPdfUrl(url); // Set the fetched PDF URL
-        } catch (error) {
-          console.error("Error fetching PDF URL: ", error);
-        } finally {
-          setLoading(false); // Stop loading after the attempt
+    const fetchBookDocUrl = async () => {
+      try {
+        const response = await fetch(`/api/books/${bookId}`); // Ensure /api prefix is correct
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch book document.');
         }
-      };
-      fetchPdfUrl();
-    } else {
-      setLoading(false);
-    }
-  }, [bookdocPath]);
 
-  // Function to handle PDF download
-  const handleDownload = () => {
-    if (pdfUrl) {
-      const a = document.createElement('a');
-      a.href = pdfUrl;
-      a.download = `${name}.pdf`; // Download with a name
-      a.target = '_blank'; // Open in a new tab
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      alert('PDF document not available.');
+        const data = await response.json(); // Parse JSON response
+
+        if (data && data.bookdoc) {
+          setBookDocUrl(data.bookdoc);
+        } else {
+          console.error('No bookdoc URL found in response.');
+        }
+      } catch (error) {
+        console.error('Error fetching book document:', error);
+      }
+    };
+
+    if (bookId) {
+      fetchBookDocUrl();
     }
+  }, [bookId]);
+
+  // Function to handle downloading the bill (or info)
+  const handleDownloadInfo = () => {
+    const billContent = `
+      Book Name: ${name}
+      Price: $${price}
+      Image URL: ${image}
+      Book URL: ${initialBookDoc} // URL from initial params
+    `;
+    const blob = new Blob([billContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'bill.txt';
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -64,18 +68,23 @@ const BookDoc = () => {
           {image && <img src={image} alt={name} className="bill-image" />}
           <p><strong>Book Name:</strong> {name}</p>
           <p><strong>Price:</strong> ${price}</p>
-          <p><strong>book pdf url:</strong> ${bookdocPath}</p>
-
-          {/* Show loading state */}
-          {loading ? (
-            <p>Loading PDF...</p>
-          ) : pdfUrl ? (
-            <>
-              <p><strong>Book Document URL:</strong> <a href={pdfUrl} target="_blank" rel="noopener noreferrer">View PDF</a></p>
-              <button className="btn btn-primary downpdfbtn" onClick={handleDownload}>Download Book PDF</button>
-            </>
+          <button className="btn btn-primary downpdfbtn" onClick={handleDownloadInfo}>
+            Download Info
+          </button>
+          {bookDocUrl ? (
+            <button
+              className="btn btn-success downpdfbtn"
+              onClick={() => {
+                const a = document.createElement('a');
+                a.href = bookDocUrl;
+                a.download = `${name}_document.pdf`;
+                window.open(bookDocUrl, '_blank');
+              }}
+            >
+              Download Book PDF
+            </button>
           ) : (
-            <p>PDF document not available.</p>
+            <p>Loading book document...</p>
           )}
         </div>
       </div>

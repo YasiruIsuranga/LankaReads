@@ -261,7 +261,7 @@ app.delete('/api/deliveries/:id', async (req, res) => {
 
 
 app.post('/create-checkout-session', async (req, res) => {
-    const { amount, name, image, price, bookId } = req.body;
+    const { amount, name, image, price, bookdoc,bookId } = req.body;
 
     try {
         const baseUrl = process.env.BASE_URL;
@@ -285,8 +285,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${baseUrl}bookdoc?bookId=${bookId}&name=${encodeURIComponent(name)}&price=${price}&image=${encodeURIComponent(image)}`,
-            cancel_url: `${baseUrl}/`,
+            success_url: `${baseUrl}bookdoc?bookId=${bookId}&name=${encodeURIComponent(name)}&price=${price}&bookdoc=${encodeURIComponent(bookdoc)}&image=${encodeURIComponent(image)}`,
+            cancel_url: `${baseUrl}`,
         });
 
         res.json({ url: session.url });
@@ -322,7 +322,7 @@ app.post('/create-cart-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${baseUrl}multiplebookdoc?cart=${encodeURIComponent(JSON.stringify(cart))}&totalPrice=${totalPrice}`,
+            success_url: `${baseUrl}multiplebookdoc?totalPrice=${totalPrice}`,
             cancel_url: `${baseUrl}/cancel`,
         });
 

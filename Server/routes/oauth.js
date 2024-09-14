@@ -57,7 +57,7 @@ router.get('/', async function(req, res, next) {
         }
 
         // Redirect the user to the homepage (your frontend app)
-        res.redirect(`http://localhost:5173/home?userId=${user._id}`); // Change this URL to your actual home page
+        res.redirect(`http://localhost:5173/home?userId=${user._id}&name=${user.name}&email=${user.email}`); // Change this URL to your actual home page
     } catch (err) {
         console.error('Error during Google authentication:', err);
         res.status(500).send('Authentication failed');
