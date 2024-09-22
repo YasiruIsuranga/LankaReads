@@ -11,6 +11,7 @@
   object-fit: cover;
 }
 
+/* Responsive text size */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -27,19 +28,37 @@
   padding: 20px;
 }
 
+/* Responsive font sizes using Bootstrap */
 .welcome {
-  font-size: 2.5rem;
+  font-size: 2.5rem; /* Adjust with media query for mobile */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   color: #f42d00; /* Orange for contrast */
+  margin-top: 60px;
 }
 
 .lanka {
-  font-size: 3.5rem;
+  font-size: 3.5rem; /* Adjust with media query for mobile */
   font-family: 'Georgia', serif;
   font-weight: bold;
   margin: 20px 0;
   color: #fff; /* White for better visibility */
+}
+
+/* Adjust text size for smaller screens */
+@media (max-width: 768px) {
+  .welcome {
+    font-size: 2rem;
+  }
+  
+  .lanka {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    max-width: 90%; /* Reduced width for smaller screens */
+  }
 }
 
 .description {
@@ -49,13 +68,16 @@
   max-width: 700px;
 }
 
+/* Button Container */
 .hero-buttons-container {
   margin: 12px 0;
-  width: 500px;
+  width: 100%; /* Ensure buttons fill space on mobile */
+  max-width: 500px;
   display: flex;
   justify-content: space-around;
 }
 
+/* Responsive buttons for smaller screens */
 .reader-btn, .author-btn {
   font-size: 1.1rem;
   padding: 12px 25px;
@@ -72,10 +94,20 @@
   font-weight: bold;
 }
 
-.card-slider-container {
-  margin-top: 30px;
+/* Adjust button width for smaller screens */
+@media (max-width: 768px) {
+  .reader-btn, .author-btn {
+    width: 100%; /* Buttons will take full width on small screens */
+    margin-bottom: 15px; /* Space between buttons on mobile */
+  }
 }
 
+/* Card slider container */
+.card-slider-container {
+  margin-top: -30px;
+}
+
+/* Author modal */
 .author-modal {
   position: fixed;
   top: 0;

@@ -61,6 +61,7 @@ router.get('/books/:id', async (req, res) => {
         price: book.price,
         image: book.image,
         bookdoc: book.bookdoc,
+        description: book.description,
       });
     } catch (error) {
       console.error('Error fetching book:', error);

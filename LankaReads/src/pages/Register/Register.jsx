@@ -57,8 +57,12 @@ function Register() {
         }
         try {
             await axios.post('http://localhost:5000/api/auth/register', formData);
-            alert('Registration successful!');
+            alert('Registration successful! Now Please Login to shop');
             setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+            setError('');  // Clear any previous error messages
+
+            // navigate('/home');  // Change this to '/home' if you want to redirect to the home page
+
         } catch (err) {
             console.error(err);
             setError("Registration failed. Try again.");

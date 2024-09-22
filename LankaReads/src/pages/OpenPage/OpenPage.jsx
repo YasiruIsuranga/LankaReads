@@ -46,6 +46,7 @@ function OpenPage() {
             image: book.image,
             price: book.price,
             bookdoc: book.bookdoc,
+            description: book.description,
         });
         const sessionUrl = response.data.url;
         window.location.href = sessionUrl;
@@ -79,10 +80,11 @@ function OpenPage() {
 
             {/* Book Information Column */}
             <div className="col-md-6 d-flex flex-column justify-content-center">
+              <p className="book-description">{book.description}</p>
+              <br /><br />
               <h2 className="heading-secondary mb-3">{book.name}</h2>
               <p className="book-author">Author: {book.author}</p>
               <p className="book-price">Price: ${book.price.toFixed(2)}</p>
-              <p className="book-description">{book.description}</p>
               <div className="d-flex gap-2">
                 <button
                   className="btn btn-primary flex-fill"

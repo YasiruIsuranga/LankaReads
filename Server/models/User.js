@@ -22,19 +22,23 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-// Hash password before saving
-
-// UserSchema.pre('save', async function(next) {
-//     if (!this.isModified('password')) {
-//         return next();
-//     }
-//     const salt = await bcrypt.genSalt(10);
-//     this.password = await bcrypt.hash(this.password, salt);
-//     next();
-// });
+// Hash password before saving, but only if it's a manual user (i.e., password exists)
+UserSchema.pre('save', async function (next) {
+    if (!this.password || !this.isModified('password')) {
+        return next();
+    }
+    
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        return next(error);
+    }
+});
 
 // Match user-entered password with the hashed password in the database
-UserSchema.methods.matchPassword = async function(enteredPassword) {
+UserSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
